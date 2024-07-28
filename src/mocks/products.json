@@ -1,0 +1,112 @@
+{
+  "products":[
+     {
+        "id":1,
+        "title":"Key Holder",
+        "description":"Attractive DesignMetallic materialFour key hooksReliable & DurablePremium Quality",
+        "price":30,
+        "discountPercentage":2.92,
+        "rating":4.92,
+        "stock":54,
+        "brand":"Golden",
+        "category":"home-decoration",
+        "thumbnail":"https://ricciardijoyas.com/wp-content/uploads/2023/01/joyas.png",
+        "images":[
+           "https://i.dummyjson.com/data/products/30/1.jpg",
+           "https://i.dummyjson.com/data/products/30/2.jpg",
+           "https://i.dummyjson.com/data/products/30/3.jpg",
+           "https://i.dummyjson.com/data/products/30/thumbnail.jpg"
+        ]
+     },
+     {
+        "id":2,
+        "title":"MacBook Pro",
+        "description":"MacBook Pro 2021 with mini-LED display may launch between September, November",
+        "price":1749,
+        "discountPercentage":11.02,
+        "rating":4.57,
+        "stock":83,
+        "brand":"Apple",
+        "category":"laptops",
+        "thumbnail":"https://ricciardijoyas.com/wp-content/uploads/2023/01/joyas.png",
+        "images":[
+           "https://i.dummyjson.com/data/products/6/1.png",
+           "https://i.dummyjson.com/data/products/6/2.jpg",
+           "https://i.dummyjson.com/data/products/6/3.png",
+           "https://i.dummyjson.com/data/products/6/4.jpg"
+        ]
+     },
+     {
+        "id":3,
+        "title":"iPhone X",
+        "description":"SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+        "price":899,
+        "discountPercentage":17.94,
+        "rating":4.44,
+        "stock":34,
+        "brand":"Apple",
+        "category":"smartphones",
+        "thumbnail":"https://ricciardijoyas.com/wp-content/uploads/2023/01/joyas.png",
+        "images":[
+           "https://i.dummyjson.com/data/products/2/1.jpg",
+           "https://i.dummyjson.com/data/products/2/2.jpg",
+           "https://i.dummyjson.com/data/products/2/3.jpg",
+           "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+        ]
+     },
+     {
+        "id":4,
+        "title":"Samsung Universe 9",
+        "description":"Samsung's new variant which goes beyond Galaxy to the Universe",
+        "price":1249,
+        "discountPercentage":15.46,
+        "rating":4.09,
+        "stock":36,
+        "brand":"Samsung",
+        "category":"smartphones",
+        "thumbnail":"https://ricciardijoyas.com/wp-content/uploads/2023/01/joyas.png",
+        "images":[
+           "https://i.dummyjson.com/data/products/3/1.jpg"
+        ]
+     },
+     {
+        "id":5,
+        "title":"OPPOF19",
+        "description":"OPPO F19 is officially announced on April 2021.",
+        "price":280,
+        "discountPercentage":17.91,
+        "rating":4.3,
+        "stock":123,
+        "brand":"OPPO",
+        "category":"smartphones",
+        "thumbnail":"https://ricciardijoyas.com/wp-content/uploads/2023/01/joyas.png",
+        "images":[
+           "https://i.dummyjson.com/data/products/4/1.jpg",
+           "https://i.dummyjson.com/data/products/4/2.jpg",
+           "https://i.dummyjson.com/data/products/4/3.jpg",
+           "https://i.dummyjson.com/data/products/4/4.jpg",
+           "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
+        ]
+     },
+     {
+        "id":6,
+        "title":"Huawei P30",
+        "description":"Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
+        "price":499,
+        "discountPercentage":10.58,
+        "rating":4.09,
+        "stock":32,
+        "brand":"Huawei",
+        "category":"smartphones",
+        "thumbnail":"https://ricciardijoyas.com/wp-content/uploads/2023/01/joyas.png",
+        "images":[
+           "https://i.dummyjson.com/data/products/5/1.jpg",
+           "https://i.dummyjson.com/data/products/5/2.jpg",
+           "https://i.dummyjson.com/data/products/5/3.jpg"
+        ]
+     }
+  ],
+  "total":100,
+  "skip":0,
+  "limit":6
+}
