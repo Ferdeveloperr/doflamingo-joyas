@@ -15,5 +15,5 @@ export function useFilter(){
             (filter.category === 'all' || product.category === filter.category)) 
     })
     }
-    return {filterProducts, setFilter }
+    return {filterProducts, setFilter, filter }
   }

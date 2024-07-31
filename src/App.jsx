@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Header } from './components/Header.jsx'
 import { Footer } from './components/Footer.jsx'
 import { useFilter } from './hooks/useFilters.js'
+import { Cart } from './components/Cart.jsx'
 
 
 
@@ -16,6 +17,7 @@ function App() {
   <>
 
   <Header/>
+  <Cart/>
   <Products products={filteredProducts} />
   <Footer/>
 
