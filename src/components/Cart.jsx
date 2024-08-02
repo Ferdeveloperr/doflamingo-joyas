@@ -7,7 +7,7 @@ export function Cart () {
     const cartCheckboxId = useId()
     return (
         <>
-            <label className='cart-button' htmlFor='cart'>
+            <label className='cart-button' htmlFor={cartCheckboxId}>
                 <CartIcon />
             </label>
             <input type="checkbox" id={cartCheckboxId} hidden />
@@ -30,7 +30,9 @@ export function Cart () {
                             <button>+</button>
                         </footer>
                     </li>
-                    <button><ClearCartIcon /></button>
+                    <button className='ButtonStyle'>
+                        <ClearCartIcon />
+                    </button>
                 </ul>
             </aside>
         </>

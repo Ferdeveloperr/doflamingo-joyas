@@ -1,32 +1,42 @@
 .cart {
     background: #000;
     display: none;
-    padding: 32px;
+    padding: 20px;
     position: fixed;
     right: 0px;
     top: 0px;
     width: 200px;
+    color: white;
+   
   }
   
   .cart img {
-    aspect-ratio: 16/9;
+    aspect-ratio: 4/3;
     width: 100%;
+  }
+
+  .cart ul {
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
   }
   
   .cart li {
     border-bottom: 1px solid #444;
     padding-bottom: 16px;
+    
   }
   
   .cart footer {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     justify-content: center;
     align-items: center;
   }
   
   .cart footer button {
-    padding: 8px;
+    padding: px;
+    margin-top: 5px;
   }
   
   .cart-button {
@@ -44,6 +54,13 @@
     transition: all .3s ease;
     width: 32px;
     z-index: 9999;
+  }
+
+  .ButtonStyle{
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
   }
   
   .cart-button:hover {
