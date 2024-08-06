@@ -5,3 +5,51 @@
     gap: 0.5rem;
     font-size: 20px;
 }
+
+
+.styled-text {
+    position: relative;
+    display: inline-block;
+    font-size: 1rem; /* Ajusta según tu diseño */
+    font-weight: bold; /* Opcional, según tus necesidades */
+    color: transparent; /* Hace que el texto real sea transparente */
+    transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.styled-text::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, white 65%, pink 35%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    border: 1px solid black; /* Borde negro fino */
+    display: block;
+    transition: transform 0.3s ease; /* Transiciones suaves */
+}
+
+.styled-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: transform 0.3s ease; /* Transiciones suaves */
+}
+
+
+.styled-text:hover {
+    transform: scale(1.1); /* Aumenta el tamaño del texto */
+    color: transparent; /* Mantiene el texto original oculto */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Añade una sombra */
+}
+
+
+
+
