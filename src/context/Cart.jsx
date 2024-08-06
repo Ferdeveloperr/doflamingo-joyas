@@ -1,41 +1,43 @@
-import  {createContext, useState} from 'react'
+import { createContext, useState } from 'react';
 
-export const CartContext = createContext()
+export const CartContext = createContext();
 
-export function CartProvider ({ children }) {
-    const {Cart, setCart} = useState([])
+export function CartProvider({ children }) {
+    const [cart, setCart] = useState([]);
+    console.log(cart);
 
-    const addToCart = product => {
+    const addToCart = (product) => {
+        const productInCartIndex = cart.findIndex((item) => item.id === product.id);
 
-        const productInCartIndex = Cart.findIndex ( item => item.id === product.id) 
-
-        //Structure clone to avoid mutating state
+        // Estructura clonar para evitar mutar el estado
         if (productInCartIndex >= 0) {
-            const newCart = structuredClone(Cart)
-            newCart[productInCartIndex].quantity +=1
-          return  setCart(newCart)
-    } 
+            const newCart = structuredClone(cart);
+            newCart[productInCartIndex].quantity += 1;
+            return setCart(newCart);
+        }
 
-    setCart(prevState => ([
-        ...prevState, 
-        {
-            ...product,
-             quantity: 1
-            }
-        ]))
-}
+        setCart((prevState) => [
+            ...prevState,
+            {
+                ...product,
+                quantity: 1,
+            },
+        ]);
+    };
 
     const clearCart = () => {
-        setCart([])
-    } 
+        setCart([]);
+    };
 
     return (
-        <CartContext.Provider value={{
-            Cart: Cart,
-            addToCart, 
-            clearCart}}>
-
+        <CartContext.Provider
+            value={{
+                cart,
+                addToCart,
+                clearCart,
+            }}
+        >
             {children}
         </CartContext.Provider>
-    )
+    );
 }

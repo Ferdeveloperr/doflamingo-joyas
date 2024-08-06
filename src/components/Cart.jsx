@@ -1,10 +1,37 @@
-import { useId } from "react";
+import { useId } from 'react';
 import { ClearCartIcon, CartIcon } from "./Icons.jsx";
 import './Cart.css'
+import { useCart } from "../hooks/useCart.js";
 
+
+
+function CartItem ({ thumbnail , title, price, quantity, addToCart }) {
+    return (
+        <li>
+                        <img
+                        src={thumbnail}
+                        alt={title} />
+
+                        <div>
+                            <strong>{title}</strong> - ${price}
+                            
+                        </div>
+
+                        <footer>
+                            <small onClick={addToCart}>
+                                qty: {quantity}
+                            </small>
+                            <button>+</button>
+                        </footer>
+        </li>
+    )
+}
 export function Cart () {
 
+
     const cartCheckboxId = useId()
+
+    const { cart, clearCart, addToCart } = useCart()
     return (
         <>
             <label className='cart-button' htmlFor={cartCheckboxId}>
@@ -14,26 +41,19 @@ export function Cart () {
 
             <aside className='cart'>
                 <ul>
-                    <li>
-                        <img
-                        src='https://joyaspino.com/wp-content/uploads/2022/12/AO-7-600x600.jpg'
-                        alt='Random img' />
+                    {cart.map(product =>  (
+                    <CartItem
+                     key={product.id}
+                     addToCart={() => addToCart(product)}
+                     {...product} />    
+                    ))
+                    }
+                </ul>
 
-                        <div>
-                            <strong>Random Product</strong> - $499
-                        </div>
-
-                        <footer>
-                            <small>
-                                qty: 1
-                            </small>
-                            <button>+</button>
-                        </footer>
-                    </li>
-                    <button className='ButtonStyle'>
+                    <button className='ButtonStyle' onClick={clearCart}>
                         <ClearCartIcon />
                     </button>
-                </ul>
+                
             </aside>
         </>
 

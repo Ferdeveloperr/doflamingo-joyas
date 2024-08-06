@@ -1,42 +1,45 @@
-import './Products.css'
-import  {AddToCartIcon} from './Icons.jsx' 
-// import PropTypes from 'prop-types';    
+import './Products.css';
+import { AddToCartIcon, RemoveFromCartIcon } from './Icons.jsx';
 import { useCart } from '../hooks/useCart.js';
 
-export function Products ({ products }) {
-   const {addToCart} = useCart()
+export function Products({ products }) {
+    const { addToCart, cart } = useCart();
 
-    
+    const checkProductInCart = (product) => {
+        return cart.some((item) => item.id === product.id);
+    };
+
+    console.log(cart); // Para verificar el estado del carrito
+    console.log(checkProductInCart); // Para verificar la función
 
     return (
         <main className='products'>
             <ul>
-                {products.map(product => (
-                    <li key={product.id}>
-                        <img src={product.thumbnail}
-                         alt={product.title}
-                        />
-                        <div>
-                            <strong>{product.title}</strong> - ${product.price}
-                        </div>
-                        <button onClick={() => addToCart(product)}>
-                        <AddToCartIcon />
-                        </button>
-                    </li>
+                {products.map((product) => {
+                    const isProductInCart = checkProductInCart(product);
 
-                ))} 
+                    return (
+                        <li key={product.id}>
+                            <img
+                                src={product.thumbnail}
+                                alt={product.title}
+                            />
+                            <div>
+                                <strong>{product.title}</strong> - ${product.price}
+                            </div>
+                            <button onClick={() => addToCart(product)}>
+                                {isProductInCart ? (
+                                    <RemoveFromCartIcon />
+                                ) : (
+                                    <AddToCartIcon />
+                                )}
+                            </button>
+                        </li>
+                    );
+                })}
             </ul>
-        </main> 
-    )
+        </main>
+    );
 }
 
-// Products.propTypes = {
-//     products: PropTypes.arrayOf(
-//       PropTypes.shape({
-//         id: PropTypes.number.isRequired,
-//         thumbnail: PropTypes.string.isRequired,
-//         title: PropTypes.string.isRequired,
-//         price: PropTypes.number.isRequired,
-//       })
-//     ).isRequired,
-//   };
+
