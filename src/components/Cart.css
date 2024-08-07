@@ -1,12 +1,14 @@
 .cart {
     background: #000;
     display: none;
-    padding: 20px;
+    padding: 25px;
     position: fixed;
     right: 0px;
     top: 0px;
     width: 200px;
     color: white;
+    max-height: 100vh; /* Limita la altura máxima del carrito */
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
    
   }
   
@@ -23,25 +25,24 @@
   
   .cart li {
     border-bottom: 1px solid #444;
-    padding-bottom: 16px;
+    padding-bottom: 14px;
     
   }
   
   .cart footer {
     display: flex;
-    gap: 6px;
     justify-content: center;
     align-items: center;
   }
   
   .cart footer button {
-    padding: px;
+    padding: 5px;
     margin-top: 5px;
   }
   
   .cart-button {
     align-items: center;
-    background: #09f;
+    background: pink;
     border-radius: 9999px;
     cursor: pointer;
     display: flex;
@@ -50,7 +51,7 @@
     padding: 4px;
     position: absolute;
     right: 8px;
-    top: 8px;
+    top: 1rem;
     transition: all .3s ease;
     width: 32px;
     z-index: 9999;
@@ -58,7 +59,8 @@
 
   .ButtonStyle{
     display: flex;
-    width: 50%;
+    width: 100%;
+    text-align: center;
     justify-content: center;
     align-items: center;
   }

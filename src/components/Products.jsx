@@ -1,6 +1,6 @@
 import './Products.css';
-import { AddToCartIcon, RemoveFromCartIcon } from './Icons.jsx';
 import { useCart } from '../hooks/useCart.js';
+import { ProductCard } from './ProductCard';
 
 export function Products({ products }) {
     const { addToCart, cart } = useCart();
@@ -9,9 +9,6 @@ export function Products({ products }) {
         return cart.some((item) => item.id === product.id);
     };
 
-    console.log(cart); // Para verificar el estado del carrito
-    console.log(checkProductInCart); // Para verificar la función
-
     return (
         <main className='products'>
             <ul>
@@ -19,27 +16,15 @@ export function Products({ products }) {
                     const isProductInCart = checkProductInCart(product);
 
                     return (
-                        <li key={product.id}>
-                            <img
-                                src={product.thumbnail}
-                                alt={product.title}
-                            />
-                            <div>
-                                <strong>{product.title}</strong> - ${product.price}
-                            </div>
-                            <button onClick={() => addToCart(product)}>
-                                {isProductInCart ? (
-                                    <RemoveFromCartIcon />
-                                ) : (
-                                    <AddToCartIcon />
-                                )}
-                            </button>
-                        </li>
+                        <ProductCard 
+                            key={product.id} 
+                            product={product} 
+                            addToCart={addToCart} 
+                            isProductInCart={isProductInCart} 
+                        />
                     );
                 })}
             </ul>
         </main>
     );
 }
-
-

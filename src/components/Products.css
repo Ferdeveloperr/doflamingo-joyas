@@ -14,10 +14,22 @@
             1fr
         )
     );
-    gap: 1rem
+    gap: 1rem;
+    
+    
 }
 
 .products li {
     display: flex;
     flex-direction: column;
+    text-align: center;
+    
+}
+
+.products button {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 }
