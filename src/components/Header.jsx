@@ -44,6 +44,9 @@ export function Header () {
         </nav>
     
         <header>
+        <div className="bg-pink-500 text-white py-4 text-center">
+                <span className="font-semibold text-lg">¡Gran Oferta! Obtén un 20% de descuento en tu primera compra. Usa el código: <strong>JOY20</strong></span>
+            </div>
             <h1 className='h1'>Doflamingo Joyas</h1>
             <Filters/>
         </header>

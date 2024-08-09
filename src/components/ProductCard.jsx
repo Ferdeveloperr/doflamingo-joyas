@@ -1,23 +1,35 @@
-
+import { useState } from 'react';
 import { AddToCartIcon, RemoveFromCartIcon } from './Icons.jsx';
+import './productCard.css';
 
 export function ProductCard({ product, addToCart, isProductInCart, removeFromCart }) {
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const shortDescription = product.description.split(' ').slice(0, 3).join(' ') + '...';
+
     return (
-        <div className="max-w-sm rounded overflow-hidden shadow-md bg-white text-white m-4 transform transition duration-500 hover:scale-105 " >
+        <div className="max-w-sm rounded overflow-hidden shadow-md bg-white  m-4 transform transition duration-500 hover:scale-105">
             <img className="w-full h-30 object-cover" src={product.thumbnail} alt={product.title} />
-            <div className="px-6 py-6 ">
-                <div className="font-bold text-xl mb-2" >{product.title}</div>
-                <p className="text-pink-500 text-base mb-2" >
-                    ${product.price}
-                </p>
-                <p className="text-pink-400 text-base mb-2 ">
-                    {product.description}
+            <div className="px-6 py-6">
+                <div className="font-bold text-xl text-[#ffb74d] text-center mb-2">{product.title}</div>
+                <p className=" font-bold text-center mb-2">${product.price}</p>
+                <p className="text-pink-400 text-center mb-2">
+                    {isExpanded ? product.description : shortDescription}
+                    <div>
+                    <button className="flex justify-center text-pink-500 ml-8 font-semibold"
+                        onClick={() => setIsExpanded(!isExpanded)} 
+                    
+                    >
+                        {isExpanded ? 'Ver menos' : 'Ver más'}
+                    </button>
+                    </div>
                 </p>
             </div>
-            <div className="px-6 pt-4 pb-2">
-            <button 
+            <div className="px-6 pt-2 pb-4">
+                <button 
                     onClick={() => isProductInCart ? removeFromCart(product) : addToCart(product)}
-                    className="bg-pink-500 hover:bg-pink-600 text-white font-base py-2 px-4 rounded-full flex items-center justify-center"
+                    className="bg-[#ffb74d] hover:bg-[#d3963b] text-white font-base py-1 px-3 rounded-md flex items-center justify-center transition-colors duration-500 hover:duration-5000 ease-in-out"
+                    
                 >
                     {isProductInCart ? (
                         <>
@@ -35,3 +47,4 @@ export function ProductCard({ product, addToCart, isProductInCart, removeFromCar
         </div>
     );
 }
+
