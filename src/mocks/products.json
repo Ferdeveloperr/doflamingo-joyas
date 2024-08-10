@@ -9,7 +9,7 @@
         "rating":4.92,
         "stock":54,
         "brand":"Golden",
-        "category":"Rings",
+        "category":"Anillos",
         "thumbnail":"https://ricciardijoyas.com/wp-content/uploads/2023/01/joyas.png",
         "images":[
            "https://i.dummyjson.com/data/products/30/1.jpg",
@@ -27,7 +27,7 @@
         "rating":4.57,
         "stock":83,
         "brand":"Apple",
-        "category":"Rings",
+        "category":"Anillos",
         "thumbnail":"https://ricciardijoyas.com/wp-content/uploads/2023/01/joyas.png",
         "images":[
            "https://i.dummyjson.com/data/products/6/1.png",
@@ -45,7 +45,7 @@
         "rating":4.44,
         "stock":34,
         "brand":"Apple",
-        "category":"bracelets",
+        "category":"Pulseras",
         "thumbnail":"https://media.bulgari.com/image/upload/c_pad,h_600,w_600/q_auto/f_auto/454275.png",
         "images":[
            "https://i.dummyjson.com/data/products/2/1.jpg",
@@ -63,7 +63,7 @@
         "rating":4.09,
         "stock":36,
         "brand":"Samsung",
-        "category":"bracelets",
+        "category":"Pulseras",
         "thumbnail":"https://media.bulgari.com/image/upload/c_pad,h_600,w_600/q_auto/f_auto/454275.png",
         "images":[
            "https://i.dummyjson.com/data/products/3/1.jpg"
@@ -78,7 +78,7 @@
         "rating":4.3,
         "stock":123,
         "brand":"OPPO",
-        "category":"earrings",
+        "category":"Collares",
         "thumbnail":"https://www.clemenciaperis.com/wp-content/uploads/2023/08/collar-oro-blanco-18k-con-94-diamantes-cll013-1z.jpg",
         "images":[
            "https://i.dummyjson.com/data/products/4/1.jpg",
@@ -97,7 +97,7 @@
         "rating":4.09,
         "stock":32,
         "brand":"Huawei",
-        "category":"earrings",
+        "category":"Collares",
         "thumbnail":"https://www.clemenciaperis.com/wp-content/uploads/2023/08/collar-oro-blanco-18k-con-94-diamantes-cll013-1z.jpg",
         "images":[
            "https://i.dummyjson.com/data/products/5/1.jpg",

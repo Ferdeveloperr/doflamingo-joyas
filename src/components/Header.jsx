@@ -50,7 +50,7 @@ export function Header () {
             </div>
 
             <Carousel/>
-            <h1 className='h1'>Bienvenido</h1>
+            
           
         </header>
 

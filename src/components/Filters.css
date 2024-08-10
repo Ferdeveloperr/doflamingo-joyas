@@ -1,14 +1,88 @@
 .filters {
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem ;
-    font-size: 14px;
-    font-weight: 700;
+  padding: 1rem;
 }
 
-.filters div {
-    display: flex;
-    gap: 0.5rem;
+.price-filter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 }
+
+.price-filter label {
+  color: #ffb74d;
+  margin-right: 1rem;
+  font-weight: bold;
+}
+
+.price-range {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  background: #ffb74d;
+  border-radius: 5px;
+  outline: none;
+  transition: opacity 0.2s;
+}
+
+.price-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #ffa726;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.price-range::-webkit-slider-thumb:hover {
+  background: #ff9800;
+}
+
+.price-value {
+  color: #ffb74d;
+  margin-left: 1rem;
+  font-weight: bold;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-button {
+  background-color: #1a202c;
+  color: #ff66b3;
+  border: 2px solid transparent;
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.category-button.active {
+  background-color:  #ff66b3;
+  color: #1a202c;
+}
+
+.category-button:hover {
+  background-color: #ff66b3; /* Fondo rosa al hacer hover */
+  color: #ffb74d; /* Texto dorado al hacer hover */
+}
+
+@media (max-width: 768px) {
+  .filters {
+    padding: 0.5rem;
+  }
+
+  .price-filter label, .price-value {
+    font-size: 0.875rem;
+  }
+
+  .category-button {
+    font-size: 0.875rem;
+  }
+}
+

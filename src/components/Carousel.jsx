@@ -7,8 +7,8 @@ import Slider from 'react-slick';
 
 const carouselImages = [
   { src: './public/logo-doflamingo.png', alt: 'Promoción 1' },
-  { src: './public/bannerUno.jpg', alt: 'Promoción 2' },
-  { src: './public/bannerDos.jpeg', alt: 'Promoción 3' },
+  { src: './public/bannerCuatro.jpg', alt: 'Promoción 2' },
+  { src: './public/bannerTres.jpg', alt: 'Promoción 3' },
 ];
 
 const settings = {
@@ -18,7 +18,7 @@ const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplay: true,
-  autoplaySpeed: 1000,
+  autoplaySpeed: 100,
 };
 
 export function Carousel() {
@@ -27,7 +27,7 @@ export function Carousel() {
       <Slider {...settings}>
         {carouselImages.map((image, index) => (
           <div key={index} className="carousel-slide">
-            <img src={image.src} alt={image.alt} className="w-full h-60 object-fixed " />
+            <img src={image.src} alt={image.alt} className="w-full h-80 object-fixed " />
           </div>
         ))}
       </Slider>

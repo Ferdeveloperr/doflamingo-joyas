@@ -1,46 +1,51 @@
-import {  useId } from 'react'
-import { useFilter } from '../hooks/useFilters.js'
-import './Filters.css'
+import { useId } from 'react';
+import { useFilter } from '../hooks/useFilters.js';
+import './Filters.css';
 
+export function Filters() {
+  const { filter, setFilter } = useFilter();
+  const minPriceFilterId = useId();
 
-export function Filters () {
+  const handleChangeMinPrice = (event) => {
+    setFilter((prevState) => ({ ...prevState, minPrice: event.target.value }));
+  };
 
-    const {filter, setFilter} = useFilter()
-    const minPriceFilterId = useId()
-    const categoryFilterId = useId()
+  const handleCategoryClick = (category) => {
+    setFilter((prevState) => ({ ...prevState, category }));
+  };
 
-    const handleChangeMinPrice = (event) => {
-        
-        setFilter( prevState => ({...prevState, minPrice: event.target.value}))
-    }
+  const categories = ['Todas', 'Anillos', 'Pulseras', 'Collares'];
 
-    const handleChangeCategory = (event) => {
-        setFilter( prevState => ({...prevState, category: event.target.value}))
-    }
+  return (
+    <section className="filters">
+      <div className="price-filter">
+        <label htmlFor={minPriceFilterId}>Precio:</label>
+        <input
+          type="range"
+          id={minPriceFilterId}
+          min="0"
+          max="1000"
+          onChange={handleChangeMinPrice}
+          value={filter.minPrice}
+          className="price-range"
+        />
+        <span className="price-value">${filter.minPrice}</span>
+      </div>
 
-    return (
-        <section className='filters'>
-            <div>
-                <label htmlFor={minPriceFilterId}> Precio a partir de: </label>
-                <input type="range"
-                id={minPriceFilterId}
-                min='0'
-                max='1000'
-                onChange={handleChangeMinPrice}
-                value={filter.minPrice}
-                />
-                <span>${filter.minPrice}</span>
-            </div>    
-
-            <div>
-                <label htmlFor={categoryFilterId}> Categoria</label>
-                <select id={categoryFilterId} onChange={handleChangeCategory}>
-                    <option value="all">Todas</option>
-                    <option value="Rings">Anillos</option>
-                    <option value="bracelets">Pulseras</option>
-                    <option value="earrings">Collares</option>
-                </select>
-            </div>
-        </section> 
-)
+      <div className="categories">
+        <label>Categorías:</label>
+        {categories.map((category) => (
+          <button
+            key={category}
+            className={`category-button ${
+              filter.category === category ? 'active' : ''
+            }`}
+            onClick={() => handleCategoryClick(category)}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+    </section>
+  );
 }

@@ -12,7 +12,7 @@ export function useFilter(){
       return products.filter(product => {
           return ( 
             product.price >= filter.minPrice && 
-            (filter.category === 'all' || product.category === filter.category)) 
+            (filter.category === 'Todas' || product.category === filter.category)) 
     })
     }
     return {filterProducts, setFilter, filter }
