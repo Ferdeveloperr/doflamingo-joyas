@@ -1,7 +1,8 @@
-import { Filters } from './Filters.jsx'
+
 import './Header.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import '../assets/icons.js'
+import { Carousel } from './Carousel.jsx'; // Asegúrate de importar el carrusel
 
 export function Header () {
     return (
@@ -44,11 +45,13 @@ export function Header () {
         </nav>
     
         <header>
-        <div className="bg-pink-500 text-white py-4 text-center">
-                <span className="font-semibold text-lg">¡Gran Oferta! Obtén un 20% de descuento en tu primera compra. Usa el código: <strong>JOY20</strong></span>
+        <div className="bg-pink-500 text-white py-3 text-center">
+                <span className="font-semibold text-md">¡Gran Oferta! Obtén un 20% de descuento en tu primera compra. Usa el código: <strong>JOY20</strong></span>
             </div>
-            <h1 className='h1'>Doflamingo Joyas</h1>
-            <Filters/>
+
+            <Carousel/>
+            <h1 className='h1'>Bienvenido</h1>
+          
         </header>
 
 

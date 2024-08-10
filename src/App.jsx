@@ -5,6 +5,7 @@ import { Footer } from './components/Footer.jsx'
 import { useFilter } from './hooks/useFilters.js'
 import { Cart } from './components/Cart.jsx'
 import { CartProvider } from './context/Cart.jsx'
+import { Aside} from './components/Aside.jsx'
 
 
 
@@ -18,6 +19,7 @@ function App() {
   <CartProvider>
 
   <Header/>
+  <Aside/>
   <Cart />
   <Products products={filteredProducts} />
   <Footer/>

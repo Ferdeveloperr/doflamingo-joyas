@@ -1,0 +1,9 @@
+/* Aside.css */
+.aside-container {
+    width: 16rem; /* Ajusta el ancho del aside */
+    background-color: #1a202c; /* Color de fondo del aside */
+    color: #fff; /* Color del texto */
+    position: fixed;
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+  }
+  

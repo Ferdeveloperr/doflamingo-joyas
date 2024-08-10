@@ -11,12 +11,12 @@ export function ProductCard({ product, addToCart, isProductInCart, removeFromCar
         <div className="max-w-sm rounded overflow-hidden shadow-md bg-white  m-4 transform transition duration-500 hover:scale-105">
             <img className="w-full h-30 object-cover" src={product.thumbnail} alt={product.title} />
             <div className="px-6 py-6">
-                <div className="font-bold text-xl text-[#ffb74d] text-center mb-2">{product.title}</div>
-                <p className=" font-bold text-center mb-2">${product.price}</p>
-                <p className="text-pink-400 text-center mb-2">
+                <div className="font-semibold text-md text-[#ffb74d] text-center mb-2">{product.title}</div>
+                <p className=" font-bold text-center mb-2   rounded-lg">${product.price}</p>
+                <p className="text-pink-400 text-center text-sm mb-2">
                     {isExpanded ? product.description : shortDescription}
                     <div>
-                    <button className="flex justify-center text-pink-500 ml-8 font-semibold"
+                    <button className="flex justify-center text-pink-500 text-sm ml-8 font-semibold"
                         onClick={() => setIsExpanded(!isExpanded)} 
                     
                     >
