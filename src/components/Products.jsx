@@ -2,6 +2,8 @@ import './Products.css';
 import { useCart } from '../hooks/useCart.js';
 import { ProductCard } from './ProductCard';
 
+
+
 export function Products({ products }) {
     const { addToCart, cart, removeFromCart } = useCart();
 

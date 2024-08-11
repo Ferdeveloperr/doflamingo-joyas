@@ -7,6 +7,8 @@ import { Cart } from './components/Cart.jsx'
 import { CartProvider } from './context/Cart.jsx'
 import { Aside} from './components/Aside.jsx'
 import './components/global.css'
+import SimpleParallax from 'simple-parallax-js'
+
 
 
 
@@ -14,6 +16,7 @@ import './components/global.css'
 function App() {
   const { filterProducts } = useFilter();
   const filteredProducts = filterProducts(initialProducts);
+ 
 
   return (
     <CartProvider>
@@ -25,6 +28,12 @@ function App() {
           <Products products={filteredProducts} />
         </div>
       </div>
+      <div>
+      <SimpleParallax delay={1} transition="cubic-bezier(0,0,0,1)">
+    <img src="./public/bannerTres.jpg" alt="image" />
+  </SimpleParallax>
+      </div>
+  
       <Footer />
     </CartProvider>
   );

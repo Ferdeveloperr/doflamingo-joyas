@@ -6,8 +6,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 
 const carouselImages = [
-  { src: './public/logo-doflamingo.png', alt: 'Promoción 1' },
-  { src: './public/bannerCuatro.jpg', alt: 'Promoción 2' },
+  { src: './public/BannerCinco.png', alt: 'Promoción 1' },
+  { src: './public/bannerSeis.png', alt: 'Promoción 2' },
   { src: './public/bannerTres.jpg', alt: 'Promoción 3' },
 ];
 

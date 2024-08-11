@@ -1,3 +1,10 @@
+Body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Evita el desbordamiento horizontal */
+}
+
+
 .flex {
     display: flex;
   }
