@@ -19,6 +19,8 @@ const settings = {
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 100,
+  arrows: false,
+  adaptiveHeight: true,
 };
 
 export function Carousel() {
@@ -27,7 +29,7 @@ export function Carousel() {
       <Slider {...settings}>
         {carouselImages.map((image, index) => (
           <div key={index} className="carousel-slide">
-            <img src={image.src} alt={image.alt} className="w-full h-80 object-fixed " />
+            <img src={image.src} alt={image.alt} className="w-full h-80 object-cover " />
           </div>
         ))}
       </Slider>

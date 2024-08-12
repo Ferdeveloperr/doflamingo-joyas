@@ -1,0 +1,6 @@
+.parallaxStyle {
+    width: 100%;
+    min-height: 80vh; /* 120% de la altura de la pantalla */
+    height: auto; /* Ajusta según el contenido */
+    position: sticky;
+}

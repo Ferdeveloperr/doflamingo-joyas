@@ -8,6 +8,7 @@ import { CartProvider } from './context/Cart.jsx'
 import { Aside} from './components/Aside.jsx'
 import './components/global.css'
 import SimpleParallax from 'simple-parallax-js'
+import './components/parallax.css'
 
 
 
@@ -29,9 +30,10 @@ function App() {
         </div>
       </div>
       <div>
-      <SimpleParallax delay={1} transition="cubic-bezier(0,0,0,1)">
-    <img src="./public/bannerTres.jpg" alt="image" />
-  </SimpleParallax>
+      <SimpleParallax delay={0.5} scale={2.0}  transition="cubic-bezier(0,0,0,1)" >
+          <img src="./public/bannerTres.jpg" alt="image" />
+          
+      </SimpleParallax>
       </div>
   
       <Footer />
