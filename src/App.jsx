@@ -30,8 +30,8 @@ function App() {
         </div>
       </div>
       <div>
-      <SimpleParallax delay={0.5} scale={2.0}  transition="cubic-bezier(0,0,0,1)" >
-          <img src="./public/bannerTres.jpg" alt="image" />
+      <SimpleParallax delay={0.5} scale={1.5}  transition="cubic-bezier(0,0,0,1)" translateY="100px" >
+          <img src="./public/bannerSiete.png" alt="image" />
           
       </SimpleParallax>
       </div>
