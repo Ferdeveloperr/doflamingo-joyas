@@ -1,8 +1,9 @@
 import './Login.css'; 
 import { useState } from 'react';
+import axios from 'axios';
 
 export function Login({ onClose }) {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
@@ -10,25 +11,22 @@ export function Login({ onClose }) {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
+      const response = await axios.post('http://localhost:5000/login', {
+        email,
+        password
       });
 
-      if (response.ok) {
-        const data = await response.json();
+      if (response.status === 200) {
         // Aquí puedes manejar el éxito, como guardar el token, redirigir al usuario, etc.
-        console.log('Login successful:', data);
+        console.log('Login successful:', response.data);
         onClose(); // Cerrar el modal de login si es exitoso
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message || 'Error al iniciar sesión');
-      }
+      } 
     } catch (error) {
-      setError('Error de conexión');
+      if (error.response) {
+        setError(error.response.data.message || 'Error al iniciar sesión');
+      } else {
+        setError('Error de conexión');
+      }
     }
   };
 
@@ -39,14 +37,14 @@ export function Login({ onClose }) {
         <h2 className="login-title">Iniciar sesión</h2>
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="username">Usuario:</label>
+            <label htmlFor="email">Correo electrónico:</label>
             <input
-              type="text"
-              id="username"
-              name="username"
+              type="email"
+              id="email"
+              name="email"
               className="login-input"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
