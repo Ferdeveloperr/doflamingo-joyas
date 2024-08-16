@@ -1,8 +1,9 @@
 import './Login.css'; 
 import { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-export function Login({ onClose }) {
+export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -19,7 +20,7 @@ export function Login({ onClose }) {
       if (response.status === 200) {
         // Aquí puedes manejar el éxito, como guardar el token, redirigir al usuario, etc.
         console.log('Login successful:', response.data);
-        onClose(); // Cerrar el modal de login si es exitoso
+        
       } 
     } catch (error) {
       if (error.response) {
@@ -33,7 +34,9 @@ export function Login({ onClose }) {
   return (
     <div className="login-overlay">
       <div className="login-container">
-        <button className="login-close-button" onClick={onClose}>X</button>
+        
+        <button className="login-close-button"><Link to="/">X </Link></button>
+       
         <h2 className="login-title">Iniciar sesión</h2>
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group">
@@ -64,7 +67,7 @@ export function Login({ onClose }) {
           <button type="submit" className="login-submit">Iniciar sesión</button>
         </form>
         <p className="login-password-reset"><a href="#">Olvidé mi contraseña</a></p>
-        <p className="login-signup">¿No tienes cuenta? <a href="#">Regístrate</a></p>
+        <p className="login-signup">¿No tienes cuenta? <Link to="/register">Regístrate</Link></p>
       </div>
     </div>
   );

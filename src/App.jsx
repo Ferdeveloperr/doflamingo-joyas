@@ -9,6 +9,9 @@ import { Aside} from './components/Aside.jsx'
 import './components/global.css'
 import SimpleParallax from 'simple-parallax-js'
 import './components/parallax.css'
+import {Login} from './components/Login.jsx'
+import {Register} from './components/Register.jsx'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 
@@ -17,11 +20,21 @@ import './components/parallax.css'
 function App() {
   const { filterProducts } = useFilter();
   const filteredProducts = filterProducts(initialProducts);
+
  
 
   return (
+    
     <CartProvider>
-      <Header />
+    <Router>
+    <Header />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </Router>
+    
+      
       <div className="flex">
         <Aside />
         <div className="flex-1">
@@ -30,7 +43,7 @@ function App() {
         </div>
       </div>
       <div>
-      <SimpleParallax delay={0.5} scale={1.2}  transition="cubic-bezier(0,0,0,1)" translateY="100px" >
+      <SimpleParallax delay={0.5} scale={1.2}  transition="cubic-bezier(0,0,0,1)" translateY="100vh" translateZ="50vh" overlay="rgba(0,0,0,5)" >
           <img src="./public/bannerOcho.png" alt="image" />
           
       </SimpleParallax>

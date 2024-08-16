@@ -1,35 +1,24 @@
-// Header.jsx
-
-import { useState } from 'react';
+import { Link } from 'react-router-dom'; // Asegúrate de que esto esté presente
 import './Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../assets/icons.js';
-import { Carousel } from './Carousel.jsx';
-import { Login } from './Login.jsx'; // Importa el componente Login
+import { Carousel } from './Carousel';
 
-export function Header () {
-  const [showLogin, setShowLogin] = useState(false);
-
-  const handleLoginClick = () => {
-    setShowLogin(true);
-  };
-
-  const handleCloseLogin = () => {
-    setShowLogin(false);
-  };
-
+export function Header() {
   return (
     <>
       <nav className="bg-black">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center">
-            <img src="./public/logo-doflamingo.png" alt="Mi E-commerce" className="h-16 w-auto" />
+            <Link to="/">
+              <img src="./public/logo-doflamingo.png" alt="Mi E-commerce" className="h-16 w-auto" />
+            </Link>
           </div>
           <div className="ml-4">
             <form className="relative">
               <input 
                 type="text" 
-                placeholder="Escriba para buscar aqui" 
+                placeholder="Escriba para buscar aquí" 
                 className="bg-white-800 text-black rounded-full pl-4 pr-10 py-0.5 focus:outline-none focus:ring-2 focus:ring-pink-500"
               />
               <button 
@@ -46,9 +35,11 @@ export function Header () {
             <li><a href="#" className="styled-text" data-text="Doflamingo">Doflamingo</a></li>
             <li><a href="#" className="styled-text" data-text="Contacto">Contacto</a></li>
             <li>
-              <button onClick={handleLoginClick} className="text-white">
-                <FontAwesomeIcon icon="user" />
-              </button>
+              <Link to="/login">
+                <button className="text-white">
+                  <FontAwesomeIcon icon="user" />
+                </button>
+              </Link>
             </li>
           </ul>
         </div>
@@ -59,10 +50,9 @@ export function Header () {
           <span className="font-semibold text-md">¡Gran Oferta! Obtén un 20% de descuento en tu primera compra. Usa el código: <strong>JOY20</strong></span>
         </div>
 
-        <Carousel/>
+        <Carousel />
       </header>
-
-      {showLogin && <Login onClose={handleCloseLogin} />}
     </>
   );
 }
+
