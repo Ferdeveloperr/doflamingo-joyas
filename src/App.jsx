@@ -11,6 +11,7 @@ import SimpleParallax from 'simple-parallax-js'
 import './components/parallax.css'
 import {Login} from './components/Login.jsx'
 import {Register} from './components/Register.jsx'
+import {ForgotPassword} from './components/ForgotPassword.jsx'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -31,6 +32,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
     </Router>
     

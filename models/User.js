@@ -15,6 +15,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  resetPasswordToken: { // Token para la recuperación de contraseña
+    type: String,
+    default: null,
+  },
+  resetPasswordExpires: { // Fecha de expiración del token
+    type: Date,
+    default: null,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -37,8 +45,11 @@ userSchema.pre('save', async function(next) {
   }
 });
 
+// Método para comparar contraseñas
+userSchema.methods.comparePassword = async function(candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
 const User = mongoose.model('User', userSchema);
 
 export default User; // Exportamos usando export default
-
-

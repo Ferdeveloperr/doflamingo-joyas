@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes.js'; // Aquí importamos la exportación por defecto
 
+
 dotenv.config();
 
 const app = express();
@@ -22,10 +23,7 @@ app.use(cors({
 app.use('/', userRoutes);
 
 // Conectar a MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Conectado a MongoDB'))
   .catch((err) => console.error('Error al conectar a MongoDB', err));
 

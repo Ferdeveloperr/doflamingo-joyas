@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'; // Asegúrate de que esto esté presente
+import { Link } from 'react-router-dom';
 import './Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../assets/icons.js';

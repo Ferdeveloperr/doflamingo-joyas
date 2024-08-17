@@ -66,7 +66,7 @@ export function Login() {
           {error && <p className="login-error">{error}</p>}
           <button type="submit" className="login-submit">Iniciar sesión</button>
         </form>
-        <p className="login-password-reset"><a href="#">Olvidé mi contraseña</a></p>
+        <p className="login-password-reset"><Link to="/forgot-password">Olvidé mi contraseña</Link></p>
         <p className="login-signup">¿No tienes cuenta? <Link to="/register">Regístrate</Link></p>
       </div>
     </div>

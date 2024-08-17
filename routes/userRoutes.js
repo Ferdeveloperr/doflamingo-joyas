@@ -2,6 +2,8 @@ import express from 'express';
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import nodemailer from '../config/nodemailer.js';
+import crypto from 'crypto';
 
 const router = express.Router();
 
@@ -45,6 +47,36 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Ruta para enviar el enlace de recuperación de contraseña
+router.post('/forgot-password', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'Usuario no encontrado' });
+    }
+
+    const token = crypto.randomBytes(20).toString('hex');
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000; // Token expira en 1 hora
+    await user.save();
+
+    const resetURL = `http://localhost:5173/reset-password?token=${token}`;
+    const mailOptions = {
+      to: user.email,
+      from: process.env.EMAIL_USER,
+      subject: 'Recuperación de Contraseña',
+      text: `Has solicitado una recuperación de contraseña. Por favor, haz clic en el siguiente enlace para restablecer tu contraseña: ${resetURL}`
+    };
+
+    await nodemailer.sendMail(mailOptions);
+    res.json({ message: 'Correo de recuperación enviado' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // Obtener todos los usuarios
 router.get('/users', async (req, res) => {
   try {
@@ -76,5 +108,3 @@ router.delete('/users/:id', async (req, res) => {
 });
 
 export default router;
-
-
