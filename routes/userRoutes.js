@@ -20,8 +20,6 @@ router.post('/register', async (req, res) => {
 
 // Ruta para iniciar sesión
 router.post('/login', async (req, res) => {
-  console.log("Login request received:", req.body);
-  
   const { email, password } = req.body;
 
   try {
@@ -74,6 +72,37 @@ router.post('/forgot-password', async (req, res) => {
     res.json({ message: 'Correo de recuperación enviado' });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+});
+
+// Ruta para restablecer la contraseña
+router.post('/reset-password', async (req, res) => {
+  const { token, password } = req.body;
+
+  try {
+    // Buscar al usuario por el token y verificar que no haya expirado
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      console.log('Usuario no encontrado con el token:', token);
+      return res.status(400).json({ message: 'Token inválido o expirado' });
+    }
+
+    // Encriptar la nueva contraseña
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+
+    // Guardar los cambios
+    await user.save();
+    res.json({ message: 'Contraseña restablecida con éxito' });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 });
 

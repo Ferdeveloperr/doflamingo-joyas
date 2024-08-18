@@ -43,7 +43,7 @@ export function Login() {
             <label htmlFor="email">Correo electrónico:</label>
             <input
               type="email"
-              id="email"
+              id="login-email"
               name="email"
               className="login-input"
               value={email}
@@ -55,7 +55,7 @@ export function Login() {
             <label htmlFor="password">Contraseña:</label>
             <input
               type="password"
-              id="password"
+              id="login-password"
               name="password"
               className="login-input"
               value={password}

@@ -7,7 +7,7 @@ const sendTestEmail = async () => {
   try {
     await nodemailer.sendMail({
       from: process.env.GMAIL_USER,
-      to: 'tecnoworld.presupuestos@gmail.com',
+      to: 'fernandojgom1395@gmail.com',
       subject: 'Correo de Prueba',
       text: 'Este es un correo de prueba para verificar la configuración de Nodemailer.'
     });
