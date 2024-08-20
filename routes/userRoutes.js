@@ -31,6 +31,8 @@ router.post('/login', async (req, res) => {
 
     // Comparar la contraseña
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log('Password match result:', isMatch);
+    
     if (!isMatch) {
       return res.status(400).json({ message: 'Contraseña incorrecta' });
     }
@@ -76,35 +78,31 @@ router.post('/forgot-password', async (req, res) => {
 });
 
 // Ruta para restablecer la contraseña
+// Ruta para restablecer la contraseña
 router.post('/reset-password', async (req, res) => {
   const { token, password } = req.body;
 
   try {
-    // Buscar al usuario por el token y verificar que no haya expirado
     const user = await User.findOne({
       resetPasswordToken: token,
       resetPasswordExpires: { $gt: Date.now() }
     });
 
     if (!user) {
-      console.log('Usuario no encontrado con el token:', token);
       return res.status(400).json({ message: 'Token inválido o expirado' });
     }
 
-    // Encriptar la nueva contraseña
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    user.password = hashedPassword;
+    user.password = password; // Esto debería activar el middleware 'pre' y encriptar la nueva contraseña
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
 
-    // Guardar los cambios
     await user.save();
     res.json({ message: 'Contraseña restablecida con éxito' });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 });
+
 
 // Obtener todos los usuarios
 router.get('/users', async (req, res) => {
