@@ -1,7 +1,9 @@
 // src/components/ResetPassword.jsx
 import { useState } from 'react';
 import axios from 'axios';
+import './resetPassword.css';
 import { useLocation, useNavigate } from 'react-router-dom';
+
 
 const ResetPassword = () => {
   const location = useLocation();
@@ -40,8 +42,9 @@ console.log('Nueva contraseña recibida:', password);
   };
 
   return (
+    
     <div className="reset-password-container">
-      <h2>Restablecer Contraseña</h2>
+      
       {error && <p className="error">{error}</p>}
       {success && <p className="success">{success}</p>}
       <form onSubmit={handleSubmit}>
