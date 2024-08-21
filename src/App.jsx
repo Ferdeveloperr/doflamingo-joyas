@@ -19,6 +19,8 @@ import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
 
 
 
+
+
 function App() {
   const { filterProducts } = useFilter();
   const filteredProducts = filterProducts(initialProducts);

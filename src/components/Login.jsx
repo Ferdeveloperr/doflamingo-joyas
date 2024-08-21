@@ -47,6 +47,7 @@ export function Login() {
               id="login-email"
               name="email"
               className="login-input"
+              placeholder="Ingresa tu correo electronico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -59,6 +60,7 @@ export function Login() {
               id="login-password"
               name="password"
               className="login-input"
+              placeholder="Ingresa tu contraseña"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required

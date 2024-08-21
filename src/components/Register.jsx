@@ -55,6 +55,7 @@ export function Register({ onClose }) {
               id="name"
               name="name"
               className="register-input"
+              placeholder="Ingresa tu nombre"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -67,6 +68,7 @@ export function Register({ onClose }) {
               id="email"
               name="email"
               className="register-input"
+              placeholder="Ingresa tu correo electronico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -79,6 +81,7 @@ export function Register({ onClose }) {
               id="password"
               name="password"
               className="register-input"
+              placeholder="Ingresa tu contraseña"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -91,6 +94,7 @@ export function Register({ onClose }) {
               id="confirmPassword"
               name="confirmPassword"
               className="register-input"
+              placeholder="Confirma tu contraseña"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required

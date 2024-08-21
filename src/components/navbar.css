@@ -1,15 +1,4 @@
-/* 
-.h1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 20px;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-} */
-
-
+/* src/components/Navbar.css */
 .styled-text {
     position: relative;
     display: inline-block;
@@ -18,9 +7,9 @@
     color: transparent; 
     font-family: 'Playfair Display', serif;
     transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
-}
-
-.styled-text::before {
+  }
+  
+  .styled-text::before {
     content: attr(data-text);
     position: absolute;
     top: 0;
@@ -33,9 +22,9 @@
     color: transparent;
     display: block;
     transition: transform 0.3s ease; 
-}
-
-.styled-text::after {
+  }
+  
+  .styled-text::after {
     content: attr(data-text);
     position: absolute;
     top: 0;
@@ -44,16 +33,15 @@
     height: 100%;
     display: block;
     transition: transform 0.3s ease; 
-}
-
-
-.styled-text:hover {
+  }
+  
+  .styled-text:hover {
     transform: scale(1.1); /* Aumenta el tamaño del texto */
     color: transparent; /* Mantiene el texto original oculto */
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Añade una sombra */
-}
-
-.button-search {
+  }
+  
+  .button-search {
     position: absolute;
     top: 0;
     right: 0;
@@ -64,12 +52,9 @@
     cursor: pointer;
     z-index: 1;
     padding: 0.5rem;
-    color: white;   
+    color: black;   
     font-weight: bold;
     font-family: 'Playfair Display', serif;
     transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
-}
-
-
-
-
+  }
+  

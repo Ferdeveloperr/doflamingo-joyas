@@ -36,6 +36,7 @@ export function ForgotPassword() {
               id="email"
               name="email"
               className="forgot-password-input"
+              placeholder="Ingresa tu correo electronico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required

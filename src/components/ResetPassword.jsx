@@ -54,6 +54,7 @@ console.log('Nueva contraseña recibida:', password);
             type="password"
             id="password"
             value={password}
+            placeholder="Ingresa tu nueva contraseña"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
@@ -64,6 +65,7 @@ console.log('Nueva contraseña recibida:', password);
             type="password"
             id="confirm-password"
             value={confirmPassword}
+            placeholder="Confirma tu nueva contraseña"
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
