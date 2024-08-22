@@ -15,15 +15,15 @@ export function ProductCard({ product, addToCart, isProductInCart, removeFromCar
                 <p className=" font-bold text-center mb-2   rounded-lg">${product.price}</p>
                 <p className="text-pink-400 text-center text-sm mb-2">
                     {isExpanded ? product.description : shortDescription}
-                    <div>
-                    <button className="flex justify-center text-pink-500 text-sm ml-8 font-semibold"
-                        onClick={() => setIsExpanded(!isExpanded)} 
-                    
-                    >
-                        {isExpanded ? 'Ver menos' : 'Ver más'}
-                    </button>
-                    </div>
                 </p>
+            <div>
+                <button 
+                    className="flex justify-center text-pink-500 text-sm ml-8 font-semibold"
+                    onClick={() => setIsExpanded(!isExpanded)}>
+                        {isExpanded ? 'Ver menos' : 'Ver más'}
+                </button>
+            </div>
+
             </div>
             <div className="px-6 pt-2 pb-4">
                 <button 

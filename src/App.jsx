@@ -33,6 +33,7 @@ function App() {
     <Router>
     <Header />
       <Routes>
+      
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -49,8 +50,8 @@ function App() {
         </div>
       </div>
       <div>
-      <SimpleParallax delay={0.5} scale={1.2}  transition="cubic-bezier(0,0,0,1)" translateY="100vh" translateZ="50vh" overlay="rgba(0,0,0,5)" >
-          <img src="./public/bannerOcho.png" alt="image" />
+      <SimpleParallax delay={0.9} scale={1.2}  transition="cubic-bezier(0,0,0,1)" translateY="100vh" translateZ="30vh" overlay="rgba(0,0,0,5)" >
+          <img src="./public/bannerOcho.png" alt="image" className='h-100' />
           
       </SimpleParallax>
       </div>

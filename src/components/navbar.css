@@ -1,4 +1,5 @@
 /* src/components/Navbar.css */
+
 .styled-text {
     position: relative;
     display: inline-block;
@@ -57,4 +58,60 @@
     font-family: 'Playfair Display', serif;
     transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
   }
+
+  .login-style {
+    display: none;
+  }
+
   
+  
+
+  
+  
+
+  @media (max-width: 768px) {
+    .containner {
+    
+      padding: 0rem; /* Reduce el padding en pantallas pequeñas */
+    }
+  
+    .containner nav {
+      flex-direction: column; /* Cambia la dirección a columna para apilar los elementos */
+      align-items: center;
+    }
+  
+    .containner .mx-auto {
+      flex-direction: column; /* Alinea los elementos verticalmente */
+    }
+  
+    .containner ul {
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1rem;
+      padding: 0;
+      margin: 1rem;
+    }
+  
+    .containner .styled-text {
+      margin-bottom: 2rem; /* Espacio entre los elementos del menú */
+    }
+  
+    .containner .ml-4 {
+      margin-left: 1rem; /* Ajusta el margen izquierdo */
+      margin-bottom: 1rem; /* Añade un margen inferior para espacio entre la búsqueda y el menú */
+    }
+
+    .login-style{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0.5rem;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .login-style:hover{
+        color: rgb(253, 128, 180);
+    }
+  }

@@ -4,8 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../assets/icons.js';
 import './navbar.css';
 
+
 export function NavBar() {
   return (
+    <div className='containner'>
     <nav className="bg-black">
       <div className="container mx-auto flex justify-between items-center h-18">
         <div className="flex items-center h-18">
@@ -28,7 +30,7 @@ export function NavBar() {
             </button>
           </form>
         </div>
-        <ul className="flex space-x-4 pr-6 ml-3" >
+        <ul className="flex space-x-4 pr-4 ml-1" >
           <li><a href="#" className="styled-text" data-text="Home">Home</a></li>
           <li><a href="#" className="styled-text" data-text="Personalizados">Personalizados</a></li>
           <li><a href="#" className="styled-text" data-text="Doflamingo">Doflamingo</a></li>
@@ -36,12 +38,13 @@ export function NavBar() {
           <li>
             <Link to="/login">
               <button className="text-white ml-1">
-                <FontAwesomeIcon icon="user" />
+                <FontAwesomeIcon icon="user" size="lg" className="mr-2"  /><p className='login-style'>login</p>
               </button>
             </Link>
           </li>
         </ul>
       </div>
     </nav>
+    </div>
   );
 }
