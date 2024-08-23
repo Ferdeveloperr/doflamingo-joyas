@@ -14,6 +14,7 @@ import {Register} from './components/Register.jsx'
 import {ForgotPassword} from './components/ForgotPassword.jsx'
 import ResetPassword from './components/ResetPassword.jsx';
 import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
+import About from './pages/About.jsx'
 
 
 
@@ -33,7 +34,7 @@ function App() {
     <Router>
     <Header />
       <Routes>
-      
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -44,18 +45,18 @@ function App() {
       
       <div className="flex">
         <Aside />
-        <div className="flex-1">
+      <div className="flex-1">
           <Cart />
           <Products products={filteredProducts} />
-        </div>
       </div>
-      <div>
+      </div>
+      <div id="custom">
       <SimpleParallax delay={0.9} scale={1.2}  transition="cubic-bezier(0,0,0,1)" translateY="100vh" translateZ="30vh" overlay="rgba(0,0,0,5)" >
           <img src="./public/bannerOcho.png" alt="image" className='h-100' />
           
       </SimpleParallax>
       </div>
-  
+      <About />
       <Footer />
     </CartProvider>
   );
