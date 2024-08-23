@@ -71,8 +71,9 @@
 
   @media (max-width: 768px) {
     .containner {
-    
+        
       padding: 0rem; /* Reduce el padding en pantallas pequeñas */
+      
     }
   
     .containner nav {
