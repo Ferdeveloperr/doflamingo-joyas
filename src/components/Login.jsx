@@ -19,7 +19,7 @@ export function Login() {
 
       if (response.status === 200) {
         // Aquí puedes manejar el éxito, como guardar el token, redirigir al usuario, etc.
-        localStorage.setItem('authToken', response.data.token);
+        localStorage.setItem('token', response.data.token);
         console.log('Login successful:', response.data);
         
       } 

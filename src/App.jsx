@@ -17,6 +17,7 @@ import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
 import About from './pages/About.jsx'
 import { CustomForm } from './components/CustomForm.jsx'
 import { NavBar } from './components/NavBar.jsx'
+import { UserProvider } from './context/User.jsx'
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
  
 
   return (
-    
+    <UserProvider> 
     <CartProvider>
     <Router>
     <NavBar products={filteredProducts} /> 
@@ -65,6 +66,7 @@ function App() {
       <Footer />
 
     </CartProvider>
+    </UserProvider>
   );
 }
 

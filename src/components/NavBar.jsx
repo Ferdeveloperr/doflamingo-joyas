@@ -1,11 +1,13 @@
-import  { useState } from 'react';
+import { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../context/User'; // Importa el contexto de usuario
 import '../assets/icons.js';
 import './navbar.css';
 
 export function NavBar({ products = [] }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const { user } = useContext(UserContext); // Accede al usuario logueado desde el contexto
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -22,7 +24,6 @@ export function NavBar({ products = [] }) {
       console.log('Productos filtrados:', filteredProducts);
 
       if (filteredProducts.length > 0) {
-        // Si hay múltiples productos, mostramos una alerta con los nombres o desplazamos al primero
         const firstProductElement = document.getElementById(`product-${filteredProducts[0].id}`);
         if (firstProductElement) {
           firstProductElement.scrollIntoView({ behavior: 'smooth' });
@@ -34,6 +35,9 @@ export function NavBar({ products = [] }) {
       alert('No hay productos disponibles para buscar');
     }
   };
+
+  console.log('Usuario logueado:', user);
+
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById("about");
@@ -87,11 +91,18 @@ export function NavBar({ products = [] }) {
             <li><button onClick={scrollToAbout} className="styled-text" data-text="Doflamingo">Doflamingo</button></li>
             <li><button onClick={scrollToContact} className="styled-text" data-text="Contacto">Contacto</button></li>
             <li>
-              <Link to="/login">
-                <button className="text-white ml-2">
-                  <FontAwesomeIcon icon="user" size="lg" className="mr-2" /><p className='login-style'>login</p>
-                </button>
-              </Link>
+              {user ? (
+                <div className="text-white ml-2">
+                  <FontAwesomeIcon icon="user" size="lg" className="mr-2" />
+                  <p className='login-style'>Hola, {user.name}</p>
+                </div>
+              ) : (
+                <Link to="/login">
+                  <button className="text-white ml-2">
+                    <FontAwesomeIcon icon="user" size="lg" className="mr-2" /><p className='login-style'>Login</p>
+                  </button>
+                </Link>
+              )}
             </li>
           </ul>
         </div>
