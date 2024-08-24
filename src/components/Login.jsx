@@ -1,12 +1,13 @@
 import './Login.css'; 
 import { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Hook para la navegación
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,6 +22,8 @@ export function Login() {
         // Aquí puedes manejar el éxito, como guardar el token, redirigir al usuario, etc.
         localStorage.setItem('token', response.data.token);
         console.log('Login successful:', response.data);
+        navigate('/');
+        window.location.reload();
         
       } 
     } catch (error) {

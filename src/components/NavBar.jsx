@@ -1,13 +1,35 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../context/User'; // Importa el contexto de usuario
+import { UserContext } from '../context/User';
+import axios from 'axios';
 import '../assets/icons.js';
 import './navbar.css';
 
 export function NavBar({ products = [] }) {
   const [searchTerm, setSearchTerm] = useState('');
-  const { user } = useContext(UserContext); // Accede al usuario logueado desde el contexto
+  const { user, setUser } = useContext(UserContext); // Accede a la función de logout desde el contexto
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la visibilidad del modal
+
+
+  useEffect(() => {
+    // Intenta obtener los datos del usuario desde el localStorage al cargar el componente
+    const token = localStorage.getItem('token');
+    if (token) {
+      // Suponiendo que tienes un endpoint para obtener datos del usuario por token
+      axios.get('http://localhost:5000/me', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        setUser(response.data.user); // Actualiza el contexto con los datos del usuario
+      })
+      .catch(error => {
+        console.error('Error al obtener los datos del usuario:', error);
+      });
+    }
+  }, [setUser]);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -36,8 +58,19 @@ export function NavBar({ products = [] }) {
     }
   };
 
-  console.log('Usuario logueado:', user);
+  const handleUserIconClick = () => {
+    setIsModalOpen(true); // Abre el modal al hacer clic en el ícono de usuario
+  };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false); // Cierra el modal
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+    setIsModalOpen(false); // Cierra el modal después de cerrar sesión
+  };
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById("about");
@@ -86,20 +119,20 @@ export function NavBar({ products = [] }) {
               </button>
             </form>
           </div>
-          <ul className="flex space-x-4 pr-4 ml-1">
+          <ul className="flex space-x-4 pr-4 ml-1 align-center">
             <li><button onClick={scrollToCustom} className="styled-text" data-text="Personalizados">Personalizados</button></li>
             <li><button onClick={scrollToAbout} className="styled-text" data-text="Doflamingo">Doflamingo</button></li>
             <li><button onClick={scrollToContact} className="styled-text" data-text="Contacto">Contacto</button></li>
             <li>
               {user ? (
-                <div className="text-white ml-2">
+                <button className="text-white ml-2" onClick={handleUserIconClick}>
                   <FontAwesomeIcon icon="user" size="lg" className="mr-2" />
                   <p className='login-style'>Hola, {user.name}</p>
-                </div>
+                </button>
               ) : (
                 <Link to="/login">
                   <button className="text-white ml-2">
-                    <FontAwesomeIcon icon="user" size="lg" className="mr-2" /><p className='login-style'>Login</p>
+                    <FontAwesomeIcon icon="user" size="lg" className="mr-2" /><p className='login-style'>Hola, Inicia sesión</p>
                   </button>
                 </Link>
               )}
@@ -107,6 +140,23 @@ export function NavBar({ products = [] }) {
           </ul>
         </div>
       </nav>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="modal-close-button" onClick={handleCloseModal}>
+              X
+            </button>
+            <h2 className="modal-title">Información del Usuario</h2>
+            <p><strong>Nombre:</strong> {user.name}</p>
+            <p><strong>Correo electrónico:</strong> {user.email}</p>
+            <button className="modal-logout-button" onClick={handleLogout}>
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

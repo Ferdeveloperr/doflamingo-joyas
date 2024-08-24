@@ -10,14 +10,23 @@ export function UserProvider({ children }) {
     // Al montar el componente, verifica si el usuario ya está logueado
     const token = localStorage.getItem('token');
     if (token) {
-      axios.get('/me', { headers: { Authorization: `Bearer ${token}` } })
-        .then(response => {
-          setUser(response.data); // Guardar los datos del usuario en el estado
-        })
-        .catch(() => {
-          // Manejo de errores (por ejemplo, token expirado)
-          localStorage.removeItem('token');
-        });
+      axios.get('http://localhost:5000/me', { headers: { Authorization: `Bearer ${token}` } })
+      .then(response => {
+        if (typeof response.data === 'string') {
+          try {
+            const jsonData = JSON.parse(response.data);
+            setUser(jsonData);
+          } catch (e) {
+            console.error('Error al convertir la respuesta en JSON:', e);
+          }
+        } else {
+          setUser(response.data);
+        }
+      })
+      .catch(error => {
+        console.error('Error al obtener el usuario:', error);
+        localStorage.removeItem('token');
+      });
     }
   }, []);
 
