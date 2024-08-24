@@ -1,4 +1,4 @@
-
+import './about.css';
 
 export function About() {
   return (
@@ -15,7 +15,7 @@ export function About() {
       <section className="mb-4">
         <h2 className="text-xl font-semibold mb-2">¿Cuánto tiempo llevamos en este negocio?</h2>
         <p className="text-sm text-gray-700">
-          Llevamos más de 10 años en la industria de la joyería, creando piezas que no solo complementan, sino que también cuentan historias. Nuestro compromiso con la calidad y la satisfacción de nuestros clientes nos ha permitido crecer y consolidarnos en el mercado.
+          Llevamos más de 2 años en la industria de la joyería, creando piezas que no solo complementan, sino que también cuentan historias. Nuestro compromiso con la calidad y la satisfacción de nuestros clientes nos ha permitido crecer y consolidarnos en el mercado.
         </p>
       </section>
 

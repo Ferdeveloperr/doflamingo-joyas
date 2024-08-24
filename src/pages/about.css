@@ -1,0 +1,116 @@
+/* Estilo general del contenedor */
+#about {
+    background-color: #ffffff; /* Fondo blanco */
+    color: #000000; /* Texto negro */
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Efecto de elevación y cambio de fondo al pasar el ratón sobre el contenedor */
+  #about:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    background-color: #f9f9f9; /* Color de fondo más claro al pasar el ratón */
+  }
+  
+  /* Efecto de burbujeo en el fondo */
+  #about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 60%);
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Animación al pasar el ratón */
+  #about:hover::before {
+    opacity: 0;
+  }
+  
+  /* Estilo de los encabezados */
+  #about h1 {
+    color: #000000;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: 'Roboto', sans-serif;
+    animation: slideIn 0.8s ease-out;
+  }
+  
+  #about h2 {
+    color: #333333;
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Línea decorativa debajo del encabezado h2 */
+  #about h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: #ff66b2; /* Color rosa */
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  /* Estilo de los párrafos */
+  #about p {
+    color: #555555;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Estilo de los márgenes en las secciones */
+  #about section {
+    margin-bottom: 2.5rem;
+    position: relative;
+    padding: 0 1rem;
+  }
+  
+  /* Animación de aparición más relevante */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Aplicar animación de aparición a las secciones */
+  #about section {
+    animation: fadeInUp 1s ease-in-out;
+    animation-delay: 0.3s;
+  }
+  
+  /* Efecto de deslizamiento en los encabezados */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
