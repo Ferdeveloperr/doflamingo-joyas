@@ -1,47 +1,72 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
+import axios from 'axios'; // Para hacer las solicitudes al backend
 
 export const CartContext = createContext();
 
 export function CartProvider({ children }) {
     const [cart, setCart] = useState([]);
-    console.log(cart);
+    const [loading, setLoading] = useState(true);
 
-    const addToCart = (product) => {
-        const productInCartIndex = cart.findIndex((item) => item.id === product.id);
+    // Cargar el carrito del backend cuando el componente se monte
+    useEffect(() => {
+        const fetchCart = async () => {
+            try {
+                const response = await axios.get('/api/cart'); // Ajusta la ruta según tu configuración
+                setCart(response.data.products);
+            } catch (error) {
+                console.error('Error al cargar el carrito', error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-        // Estructura clonar para evitar mutar el estado
-        if (productInCartIndex >= 0) {
-            const newCart = structuredClone(cart);
-            newCart[productInCartIndex].quantity += 1;
-            return setCart(newCart);
+        fetchCart();
+    }, []);
+
+    // Agregar un producto al carrito
+    const addToCart = async (product) => {
+        try {
+            const response = await axios.post('/api/cart/add', {
+                productId: product.id,
+                quantity: 1
+            });
+            setCart(response.data.products);
+        } catch (error) {
+            console.error('Error al agregar producto al carrito', error);
         }
-
-        setCart((prevState) => [
-            ...prevState,
-            {
-                ...product,
-                quantity: 1,
-            },
-        ]);
     };
 
-    const removeFromCart = (product) => {
-        setCart((prevCart) =>
-            prevCart.filter((item) => item.id !== product.id)
-        );
+    // Eliminar un producto del carrito
+    const removeFromCart = async (product) => {
+        try {
+            const response = await axios.delete(`/api/cart/remove/${product.id}`);
+            setCart(response.data.products);
+        } catch (error) {
+            console.error('Error al eliminar producto del carrito', error);
+        }
     };
 
-    const clearCart = () => {
-        setCart([]);
+    // Limpiar el carrito
+    const clearCart = async () => {
+        try {
+            await axios.delete('/api/cart/clear');
+            setCart([]);
+        } catch (error) {
+            console.error('Error al limpiar el carrito', error);
+        }
     };
+
+    if (loading) {
+        return <div>Cargando carrito...</div>; // Puedes agregar un spinner u otra indicación de carga
+    }
 
     return (
         <CartContext.Provider
             value={{
                 cart,
-                removeFromCart,
                 addToCart,
-                clearCart,
+                removeFromCart,
+                clearCart
             }}
         >
             {children}

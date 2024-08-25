@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes.js'; // Aquí importamos la exportación por defecto
+import cartRoutes from './routes/cartRoutes.js'; // Importa las rutas del carrito
 
 
 dotenv.config();
@@ -21,6 +22,8 @@ app.use(cors({
 
 // Usar las rutas de usuario
 app.use('/', userRoutes);
+// Usa las rutas del carrito
+app.use('/api/cart', cartRoutes); 
 
 // Conectar a MongoDB
 mongoose.connect(process.env.MONGODB_URI)
