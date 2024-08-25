@@ -1,4 +1,13 @@
 /* src/components/Navbar.css */
+/* navbar.css */
+
+
+  .ul-nav {
+    display: flex;
+    align-items: center; /* Centra verticalmente los li dentro del navbar */
+    height: 100%; /* Asegura que ocupen la altura completa del navbar */
+  }
+
 
 .styled-text {
     position: relative;
@@ -60,7 +69,19 @@
   }
 
   .login-style {
-    cursor: pointer;
+    font-size: 0.75rem; /* Tamaño del texto más pequeño */
+    text-align: center; /* Alineación centrada debajo del ícono */
+    white-space: nowrap; /* Evita que el texto se envuelva */
+  }
+  
+  .flex-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .mt-1 {
+    margin-top: 0.25rem; /* Añade un pequeño margen superior al texto */
   }
 
   /* navbar.css */

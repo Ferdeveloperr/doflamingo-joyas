@@ -119,7 +119,7 @@ export function NavBar({ products = [] }) {
               </button>
             </form>
           </div>
-          <ul className="flex space-x-4 pr-4 ml-1 align-center">
+          <ul className="ul-nav flex space-x-4 pr-4 ml-1 align-center justify-center">
             <li><button onClick={scrollToCustom} className="styled-text" data-text="Personalizados">Personalizados</button></li>
             <li><button onClick={scrollToAbout} className="styled-text" data-text="Doflamingo">Doflamingo</button></li>
             <li><button onClick={scrollToContact} className="styled-text" data-text="Contacto">Contacto</button></li>
@@ -132,7 +132,7 @@ export function NavBar({ products = [] }) {
               ) : (
                 <Link to="/login">
                   <button className="text-white ml-2">
-                    <FontAwesomeIcon icon="user" size="lg" className="mr-2" /><p className='login-style'>Hola, Inicia sesión</p>
+                    <FontAwesomeIcon icon="user" size="lg" className="mr-2" /><p className='login-style'>Inicia sesión</p>
                   </button>
                 </Link>
               )}

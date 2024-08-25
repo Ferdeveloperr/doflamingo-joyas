@@ -7,7 +7,7 @@ import { UserProvider } from './context/User.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 <UserProvider> 
-<FiltersProvider> 
+<FiltersProvider>     
     <App />
  </FiltersProvider> 
 </UserProvider>
