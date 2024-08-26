@@ -1,11 +1,11 @@
 import express from 'express';
 import Cart from '../models/Cart.js';
-import { authMiddleware } from '../middleware/auth.js';
+import { AuthMiddleware } from '../middleware/Auth.js';
 
 const router = express.Router();
 
 // Obtener el carrito del usuario logueado
-router.get('/', authMiddleware, async (req, res) => {
+router.get('/', AuthMiddleware, async (req, res) => {
   try {
     const cart = await Cart.findOne({ user: req.user._id }).populate('products.productId');
     if (!cart) {
@@ -18,7 +18,7 @@ router.get('/', authMiddleware, async (req, res) => {
 });
 
 // Agregar un producto al carrito
-router.post('/add', authMiddleware, async (req, res) => {
+router.post('/add', AuthMiddleware, async (req, res) => {
   const { productId, quantity } = req.body;
   
   try {
@@ -48,7 +48,7 @@ router.post('/add', authMiddleware, async (req, res) => {
 });
 
 // Eliminar un producto del carrito
-router.delete('/remove/:productId', authMiddleware, async (req, res) => {
+router.delete('/remove/:productId', AuthMiddleware, async (req, res) => {
   try {
     const cart = await Cart.findOne({ user: req.user._id });
     

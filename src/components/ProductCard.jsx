@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { AddToCartIcon, RemoveFromCartIcon } from './Icons.jsx';
 import './productCard.css';
 
