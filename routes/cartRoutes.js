@@ -20,6 +20,8 @@ router.get('/', AuthMiddleware, async (req, res) => {
 // Agregar un producto al carrito
 router.post('/add', AuthMiddleware, async (req, res) => {
   const { productId, quantity } = req.body;
+
+  console.log('Request body:', req.body); // Imprime el cuerpo de la solicitud
   
   try {
     let cart = await Cart.findOne({ user: req.user._id });
