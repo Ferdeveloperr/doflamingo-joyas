@@ -23,7 +23,9 @@ export function NavBar({ products = [] }) {
         }
       })
       .then(response => {
-        setUser(response.data.user); // Actualiza el contexto con los datos del usuario
+       
+        setUser(response.data); // Actualiza el contexto con los datos del usuario
+        console.log('Usuario obtenido:', response.data); // Verifica que el usuario se obtenga correctamente
       })
       .catch(error => {
         console.error('Error al obtener los datos del usuario:', error);

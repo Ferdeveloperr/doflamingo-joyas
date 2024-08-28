@@ -26,7 +26,7 @@ export function CartProvider({ children }) {
     // Agregar un producto al carrito
     const addToCart = async (product) => {
         try {
-            const response = await axios.post('/api/cart/add', {
+            const response = await axios.post('http://localhost:5000/api/cart/add', {
                 productId: product.id,
                 quantity: 1
             });

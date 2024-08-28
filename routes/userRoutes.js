@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import nodemailer from '../config/nodemailer.js';
 import crypto from 'crypto';
+import authMiddleware from '../middleware/Auth.js';
 
 const router = express.Router();
 
@@ -115,22 +116,8 @@ router.get('/users', async (req, res) => {
 });
 
 
-// Middleware para verificar el token
-const authMiddleware = (req, res, next) => {
-  const token = req.headers.authorization?.split(' ')[1];
-  if (!token) {
-    return res.status(401).json({ message: 'No token provided' });
-  }
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(403).json({ message: 'Invalid token' });
-    }
-    req.user = decoded; // Guarda la información del usuario en la solicitud
-    next();
-  });
-};
 
-// Aplicar el middleware a la ruta '/me'
+// Ruta protegida que utiliza el middleware de autenticación
 router.get('/me', authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
@@ -142,6 +129,7 @@ router.get('/me', authMiddleware, async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
 
 
 // Actualizar un usuario
