@@ -7,8 +7,10 @@ export function ProductCard({ product, addToCart, isProductInCart, removeFromCar
 
   const shortDescription = product.description.split(' ').slice(0, 3).join(' ') + '...';
 
+  console.log('Product in ProductCard:', product);
+
   return (
-    <div id={`product-${product.id}`} className="max-w-sm rounded overflow-hidden shadow-md bg-white m-4 transform transition duration-500 hover:scale-105">
+    <div id={`product-${product}`} className="max-w-sm rounded overflow-hidden shadow-md bg-white m-4 transform transition duration-500 hover:scale-105">
       <img className="w-full h-30 object-cover" src={product.thumbnail} alt={product.title} />
       <div className="px-6 py-6">
         <div className="font-semibold text-md text-[#ffb74d] text-center mb-2">{product.title}</div>

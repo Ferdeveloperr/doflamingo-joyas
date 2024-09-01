@@ -13,6 +13,7 @@ export function Products() {
         axios.get('http://localhost:5000/api/products')  // Asegúrate de que la URL coincida con la de tu backend
             .then(response => {
                 setProducts(response.data);  // Guarda los productos en el estado
+                console.log('Products:', response.data);
             })
             .catch(error => {
                 console.error('Error fetching products:', error);
@@ -22,6 +23,7 @@ export function Products() {
     const checkProductInCart = (product) => {
         return cart.some((item) => item.id === product.id);
     };
+    
 
     return (
         <main className='products'>
@@ -31,7 +33,7 @@ export function Products() {
 
                     return (
                         <ProductCard 
-                            key={product._id} 
+                            key={product.id}
                             product={product} 
                             addToCart={addToCart} 
                             isProductInCart={isProductInCart} 

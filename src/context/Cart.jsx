@@ -10,6 +10,7 @@ export function CartProvider({ children }) {
     useEffect(() => {
         const fetchCart = async () => {
             const token = localStorage.getItem('token'); // Obtén el token del localStorage
+            
             try {
                 const response = await axios.get('/api/cart', {
                     headers: {
@@ -18,6 +19,7 @@ export function CartProvider({ children }) {
                 });
                 setCart(response.data.products);
             } catch (error) {
+                console.log(error)
                 console.error('Error al cargar el carrito', error);
             } finally {
                 setLoading(false);
@@ -29,9 +31,12 @@ export function CartProvider({ children }) {
 
     const addToCart = async (product) => {
         const token = localStorage.getItem('token'); // Obtén el token del localStorage
+        console.log('Token:', token);
+        console.log('Producto:', product);
+      
         try {
             const response = await axios.post('http://localhost:5000/api/cart/add', {
-                productId: product.id,
+                productId: product._id,
                 quantity: 1
             }, {
                 headers: {
@@ -39,6 +44,8 @@ export function CartProvider({ children }) {
                 }
             });
             setCart(response.data.products);
+            console.log(addToCart);
+            
         } catch (error) {
             console.error('Error al agregar producto al carrito', error);
         }
