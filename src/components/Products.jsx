@@ -33,7 +33,7 @@ export function Products() {
 
                     return (
                         <ProductCard 
-                            key={product.id}
+                            key={product._id}
                             product={product} 
                             addToCart={addToCart} 
                             isProductInCart={isProductInCart} 

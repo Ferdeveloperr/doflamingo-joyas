@@ -44,7 +44,7 @@ export function CartProvider({ children }) {
                 }
             });
             setCart(response.data.products);
-            console.log(addToCart);
+            
             
         } catch (error) {
             console.error('Error al agregar producto al carrito', error);

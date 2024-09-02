@@ -4,8 +4,9 @@ import Product from '../models/Product.js'; // Asegúrate de importar el modelo 
 // Agregar un producto al carrito
 export const addToCart = async (req, res) => {
   const { productId, quantity } = req.body;
-  const userId = req.user._id;
-    console.log('Add to Cart Request:', { userId, productId, quantity });
+  const userId = req.user.id;
+    console.log('Add to Cart Request:', { userId, productId, quantity, });
+    console.log (req.user.id)
 
   try {
     let cart = await Cart.findOne({ user: userId });

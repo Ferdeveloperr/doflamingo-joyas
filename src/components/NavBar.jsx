@@ -15,6 +15,7 @@ export function NavBar({ products = [] }) {
   useEffect(() => {
     // Intenta obtener los datos del usuario desde el localStorage al cargar el componente
     const token = localStorage.getItem('token');
+    console.log(token);
     if (token) {
       // Suponiendo que tienes un endpoint para obtener datos del usuario por token
       axios.get('http://localhost:5000/me', {

@@ -34,7 +34,7 @@ export function Cart() {
                     {cart.length > 0 ? (
                         cart.map(product => (
                             <CartItem
-                                key={product.id}
+                                key={product._id}
                                 addToCart={() => addToCart(product)}
                                 {...product}
                             />
