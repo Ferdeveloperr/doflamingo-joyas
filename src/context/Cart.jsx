@@ -60,19 +60,28 @@ export function CartProvider({ children }) {
         }
     };
 
-    const removeFromCart = async (product) => {
-        const token = localStorage.getItem('token'); // Obtén el token del localStorage
-        try {
-            const response = await axios.delete(`http://localhost:5000/api/cart/remove/${product._id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}` // Incluye el token en los headers
-                }
-            });
-            setCart(response.data.products);
-        } catch (error) {
-            console.error('Error al eliminar producto del carrito', error);
-        }
-    };
+    // En el frontend
+// En el frontend
+const removeFromCart = async (product) => {
+    const token = localStorage.getItem('token');
+    try {
+        const response = await axios.delete(`http://localhost:5000/api/cart/remove/${product._id}`, {
+            quantity: 1
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        
+        setCart(response.data.products);
+        console.log('Remove Response:', response.data);
+    } catch (error) {
+        console.error('Error al eliminar producto del carrito', error);
+    }
+};
+
+
+
 
     const clearCart = async () => {
         const token = localStorage.getItem('token'); // Obtén el token del localStorage

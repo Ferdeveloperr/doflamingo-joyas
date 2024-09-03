@@ -20,7 +20,7 @@ export function Products() {
     }, []);
 
     const checkProductInCart = (product) => {
-        return cart.some((item) => item.id === product.id);
+        return cart.some((item) => item.id === product);
     };
 
     return (

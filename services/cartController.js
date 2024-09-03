@@ -8,12 +8,16 @@ export const addToCart = async (req, res) => {
     console.log('Add to Cart Request:', { userId, productId, quantity, });
     console.log (req.user.id)
 
+  
+
   try {
     let cart = await Cart.findOne({ user: userId });
 
     if (!cart) {
       cart = new Cart({ user: userId, products: [] });
     }
+
+    
 
     const productIndex = cart.products.findIndex(p => p.productId.toString() === productId);
 
@@ -23,7 +27,7 @@ export const addToCart = async (req, res) => {
       cart.products.push({ productId, quantity });
     }
 
-    // Recalcular el precio total
+// Recalcular el precio total
     cart.totalPrice = await calculateTotalPrice(cart);
 
     await cart.save();
@@ -48,32 +52,47 @@ const calculateTotalPrice = async (cart) => {
 };
 
 // Eliminar un producto del carrito
+
 export const removeFromCart = async (req, res) => {
   const { productId } = req.params;
-  const userId = req.user._id;
+  const { quantity } = req.body;
+  const userId = req.user.id;
+
+  console.log('Remove from Cart Request:', { userId, productId, quantity });
 
   try {
-    const cart = await Cart.findOne({ user: userId });
+      const cart = await Cart.findOne({ user: userId });
 
-    if (!cart) {
-      return res.status(404).json({ message: 'Carrito no encontrado' });
-    }
+      if (!cart) {
+          return res.status(404).json({ message: 'Carrito no encontrado' });
+      }
 
-    cart.products = cart.products.filter(p => p.productId.toString() !== productId);
+      const productIndex = cart.products.findIndex(p => p.productId.toString() === productId);
 
-    // Recalcular el precio total
-    cart.totalPrice = await calculateTotalPrice(cart);
+      if (productIndex > -1) {
+          if (cart.products[productIndex].quantity > quantity) {
+              cart.products[productIndex].quantity -= quantity;
+          } else {
+              cart.products.splice(productIndex, 1);
+          }
+      } else {
+          return res.status(404).json({ message: 'Producto no encontrado en el carrito' });
+      }
 
-    await cart.save();
-    res.status(200).json(cart);
+      cart.totalPrice = await calculateTotalPrice(cart);
+
+      await cart.save();
+      res.status(200).json(cart);
   } catch (error) {
-    res.status(500).json({ error: 'Error al eliminar producto del carrito' });
+      res.status(500).json({ error: 'Error al eliminar producto del carrito' });
   }
 };
 
+
+
 // Limpiar el carrito
 export const clearCart = async (req, res) => {
-  const userId = req.user._id;
+  const userId = req.user.id;
 
   try {
     const cart = await Cart.findOne({ user: userId });

@@ -3,16 +3,20 @@ import { ClearCartIcon, CartIcon } from "./Icons.jsx";
 import './Cart.css';
 import { useCart } from "../hooks/useCart.js";
 
-function CartItem({ thumbnail, title, price, quantity, addToCart }) {
+
+
+function CartItem({ thumbnail, title, price, quantity, removeFromCart }) {
     return (
         <li>
             <img src={thumbnail} alt={title} />
             <div>
-                <strong>{title}</strong> - ${price}
+                <strong>{title}</strong>
+                <button onClick={removeFromCart}>-</button> 
+                 ${price}
             </div>
             <footer>
                 <small>qty: {quantity}</small>
-                <button onClick={addToCart}>+</button>
+                
             </footer>
         </li>
     );
@@ -20,7 +24,7 @@ function CartItem({ thumbnail, title, price, quantity, addToCart }) {
 
 export function Cart() {
     const cartCheckboxId = useId();
-    const { cart = [], clearCart, addToCart } = useCart(); // Asegúrate de que `cart` es un array
+    const { cart = [], clearCart, addToCart, removeFromCart} = useCart(); // Asegúrate de que `cart` es un array
 
     return (
         <>
@@ -37,6 +41,8 @@ export function Cart() {
                                 key={product._id}
                                 addToCart={() => addToCart(product)}
                                 {...product}
+                                removeFromCart={() => removeFromCart(product)}      
+
                                 
                             />
                         ))
