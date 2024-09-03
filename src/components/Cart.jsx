@@ -37,6 +37,7 @@ export function Cart() {
                                 key={product._id}
                                 addToCart={() => addToCart(product)}
                                 {...product}
+                                
                             />
                         ))
                     ) : (

@@ -91,3 +91,22 @@ export const clearCart = async (req, res) => {
     res.status(500).json({ error: 'Error al limpiar el carrito' });
   }
 };
+
+// En cartController.js
+export const getCart = async (req, res) => {
+  const userId = req.user.id;
+  console.log(req.user.id)
+
+  try {
+    const cart = await Cart.findOne({ user: userId });
+
+    if (!cart) {
+      return res.status(404).json({ message: 'Carrito no encontrado' });
+    }
+
+    res.status(200).json(cart);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener el carrito' });
+  }
+};
+
