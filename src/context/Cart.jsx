@@ -60,14 +60,15 @@ export function CartProvider({ children }) {
         }
     };
 
-    // En el frontend
+
 // En el frontend
 const removeFromCart = async (product) => {
     const token = localStorage.getItem('token');
+    console.log('Token:', token);
+    console.log('Producto a eliminar:', product);
     try {
         const response = await axios.delete(`http://localhost:5000/api/cart/remove/${product._id}`, {
-            quantity: 1
-        }, {
+        
             headers: {
                 Authorization: `Bearer ${token}`
             }

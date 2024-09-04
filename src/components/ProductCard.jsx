@@ -7,7 +7,7 @@ export function ProductCard({ product, addToCart, isProductInCart, removeFromCar
 
   const shortDescription = product.description.split(' ').slice(0, 3).join(' ') + '...';
 
- 
+  
 
   return (
     <div id={`product-${product}`} className="max-w-sm rounded overflow-hidden shadow-md bg-white m-4 transform transition duration-500 hover:scale-105">
