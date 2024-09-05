@@ -27,4 +27,15 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// Obtener detalles de múltiples productos por sus IDs
+router.post('/details', async (req, res) => {
+  try {
+    const { ids } = req.body;
+    const products = await Product.find({ _id: { $in: ids } });
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener los productos' });
+  }
+});
+
 export default router;

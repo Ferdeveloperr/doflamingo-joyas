@@ -5,6 +5,7 @@ export const CartContext = createContext();
 
 export function CartProvider({ children }) {
     const [cart, setCart] = useState([]);
+    const [productDetails, setProductDetails] = useState([]);
 
     useEffect(() => {
         const fetchCart = async () => {
@@ -32,6 +33,17 @@ export function CartProvider({ children }) {
         fetchCart();
     }, []);
 
+    const fetchProductDetails = async (productIds) => {
+        try {
+            const response = await axios.post('http://localhost:5000/api/products/details', {
+                ids: productIds
+            });
+            setProductDetails(response.data); // Almacena los detalles de los productos en el estado
+        } catch (error) {
+            console.error('Error al obtener los detalles de los productos', error);
+        }
+    };
+
     const addToCart = async (product) => {
         const token = localStorage.getItem('token');
 
@@ -52,23 +64,21 @@ export function CartProvider({ children }) {
     };
 
     const removeFromCart = async (product) => {
-        console.log('Producto:', product);
         const token = localStorage.getItem('token');
         try {
             const response = await axios.post('http://localhost:5000/api/cart/remove', {
-                productId: product.productId, // Asegúrate de usar `productId`
-                quantity: 1 // Asegúrate de enviar un valor válido para `quantity`
+                productId: product.productId,
+                quantity: 1
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
-            console.log('Producto eliminado del carrito:', response.data);
+            setCart(response.data.products);
         } catch (error) {
             console.error('Error al eliminar el producto del carrito', error);
         }
     };
-    
 
     const clearCart = async () => {
         const token = localStorage.getItem('token');
@@ -87,7 +97,7 @@ export function CartProvider({ children }) {
     };
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, fetchProductDetails, productDetails }}>
             {children}
         </CartContext.Provider>
     );

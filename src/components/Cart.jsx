@@ -4,7 +4,7 @@ import { ClearCartIcon, CartIcon } from "./Icons.jsx";
 import './Cart.css';
 import { useCart } from "../hooks/useCart.js";
 
-function CartItem({ thumbnail, title, price, quantity, removeFromCart }) {
+function CartItem({ thumbnail, name, price, quantity, removeFromCart }) {
     const handleRemove = () => {
         removeFromCart();
         Swal.fire({
@@ -12,28 +12,25 @@ function CartItem({ thumbnail, title, price, quantity, removeFromCart }) {
             text: `Has eliminado el producto del carrito.`,
             icon: 'success',
             confirmButtonText: 'Ok'
-            
         });
     };
 
     return (
-        <li>
-            <img src={thumbnail} alt={title} />
-            <div>
-                <strong>{title}</strong>
-                <button onClick={handleRemove}>-</button>
-                ${price}
+        <li className="cart-item">
+            <img className="cart-item-img" src={thumbnail} alt={name} />
+            <div className="cart-item-details">
+                <strong className="cart-item-title">{name}</strong>
+                <p className="cart-item-price">${price}</p>
+                <small>Cantidad: {quantity}</small>
             </div>
-            <footer>
-                <small>qty: {quantity}</small>
-            </footer>
+            <button className="cart-item-remove" onClick={handleRemove}>Eliminar</button>
         </li>
     );
 }
 
 export function Cart() {
     const cartCheckboxId = useId();
-    const { cart, clearCart, addToCart, removeFromCart } = useCart();
+    const { cart, clearCart, removeFromCart } = useCart();
 
     const handleClearCart = () => {
         Swal.fire({
@@ -68,9 +65,11 @@ export function Cart() {
                         cart.map(product => (
                             <CartItem
                                 key={product._id}
-                                addToCart={() => addToCart(product)}
+                                name={product.name}
+                                thumbnail={product.imageUrl}
+                                price={product.price}
+                                quantity={product.quantity}
                                 removeFromCart={() => removeFromCart(product)}
-                                {...product}
                             />
                         ))
                     ) : (

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './CustomForm.css';
+import Swal from 'sweetalert2'; // Importamos SweetAlert2
 
 export function CustomForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,9 +11,16 @@ export function CustomForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes manejar el envío del formulario
-    alert('Formulario enviado');
-    setIsModalOpen(false);
+
+    // Muestra la alerta de éxito con SweetAlert2
+    Swal.fire({
+      title: 'Solicitud enviada',
+      text: 'Tu solicitud de diseño personalizado ha sido enviada con éxito.',
+      icon: 'success',
+      confirmButtonText: 'Aceptar'
+    });
+
+    setIsModalOpen(false); // Cierra el modal después de enviar el formulario
   };
 
   return (

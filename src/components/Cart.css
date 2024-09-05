@@ -1,79 +1,131 @@
 .cart {
-    background: #000;
-    display: none;
-    padding: 25px;
-    position: fixed;
-    right: 0px;
-    top: 0px;
-    width: 200px;
-    color: white;
-    max-height: 100vh; /* Limita la altura máxima del carrito */
-    overflow-y: auto; /* Habilita el desplazamiento vertical */
-    z-index: 9998;
-    
-   
-  }
-  
-  .cart img {
-    aspect-ratio: 4/3;
-    width: 100%;
-    
-  }
+  background: #000;
+  display: none;
+  padding: 25px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 200px; /* Aumenté el ancho para mejorar la visibilidad */
+  color: white;
+  max-height: 100vh; /* Limita la altura máxima del carrito */
+  overflow-y: auto; /* Habilita el desplazamiento vertical */
+  z-index: 9998;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Añadí una sombra para mejor visibilidad */
+  border-left: 2px solid #444; /* Añadí un borde a la izquierda para definición */
+  border-radius: 0 0 0 10px; /* Redondeé la esquina inferior izquierda */
+  transition: all 0.3s ease; /* Suaviza la transición del carrito */
+}
 
-  .cart ul {
-    list-style: none; 
-    padding: 0; 
-    margin: 0; 
-  }
-  
-  .cart li {
-    border-bottom: 1px solid #444;
-    padding-bottom: 14px;
-    
-  }
-  
-  .cart footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .cart footer button {
-    padding: 5px;
-    margin-top: 5px;
-  }
-  
-  .cart-button {
-    align-items: center;
-    background: pink;
-    border-radius: 9999px;
-    cursor: pointer;
-    display: flex;
-    height: 32px;
-    justify-content: center;
-    padding: 4px;
-    position: absolute;
-    right: 1rem;
-    top: 1.5rem;
-    transition: all .3s ease;
-    width: 32px;
-    z-index: 9999;
-    position: fixed;
-  }
+.cart img {
+  aspect-ratio: 1/1;
+  width: 80px; /* Ajusté el tamaño para que no ocupe demasiado espacio */
+  height: auto; /* Mantiene la relación de aspecto */
+  object-fit: cover; /* Ajusta la imagen dentro del contenedor */
+}
 
-  .ButtonStyle{
-    display: flex;
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .cart-button:hover {
-    scale: 1.1;
-  }
-  
-  .cart-button ~ input:checked ~ .cart {
-    height: 100%;
-    display: block;
-  }
+.cart ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+.cart li {
+  border-bottom: 1px solid #444;
+  padding: 14px 0; /* Añadí espacio arriba y abajo */
+  display: flexbox;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+.cart-item-details {
+  flex-grow: 1;
+  padding-left: 10px;
+}
+
+.cart-item-title {
+  font-size: 1rem;
+  color:red; /* Asegura que el texto sea visible en fondo oscuro */
+}
+
+.cart-item-price {
+  color: #fff;
+  font-weight: bold;
+}
+
+.cart-item-remove {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.cart-item-remove:hover {
+  background-color: #ff3333;
+}
+
+.cart footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Añadí margen superior */
+}
+
+.cart footer button {
+  background: #ff4d4d; /* Color de fondo para el botón de limpiar carrito */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.cart footer button:hover {
+  background-color: #ff3333;
+}
+
+.cart-button {
+  align-items: center;
+  background: pink;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  height: 40px; /* Ajusté el tamaño del botón */
+  justify-content: center;
+  padding: 6px;
+  position: fixed;
+  right: 1rem;
+  top: 1.5rem;
+  transition: all 0.3s ease;
+  width: 40px; /* Ajusté el tamaño del botón */
+  z-index: 9999;
+}
+
+.ButtonStyle {
+  display: flex;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.cart-button:hover {
+  transform: scale(1.1); /* Usé `transform` en lugar de `scale` para compatibilidad */
+}
+
+.cart-button ~ input:checked ~ .cart {
+  display: block;
+  height: 100%;
+}
