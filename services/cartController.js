@@ -58,8 +58,7 @@ const calculateTotalPrice = async (cart) => {
 export const removeFromCart = async (req, res) => {
   console.log('Request Params:', req.params); // Agrega este log
   console.log ('Remove from Cart Request:', req.body);
-  const { productId } = req.params;
-  const { quantity } = req.body;
+  const { quantity, productId } = req.body;
   const userId = req.user.id;
 
   console.log('Remove from Cart Request:', { userId, productId, quantity });

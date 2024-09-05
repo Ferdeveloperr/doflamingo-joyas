@@ -2,6 +2,7 @@ import './Register.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export function Register({ onClose }) {
   const [name, setName] = useState('');
@@ -9,7 +10,6 @@ export function Register({ onClose }) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,6 +17,12 @@ export function Register({ onClose }) {
     // Validar que las contraseñas coincidan
     if (password !== confirmPassword) {
       setError('Las contraseñas no coinciden');
+      Swal.fire({
+        title: 'Error',
+        text: 'Las contraseñas no coinciden',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
       return;
     }
 
@@ -29,15 +35,32 @@ export function Register({ onClose }) {
 
       if (response.status === 201) {
         // Aquí puedes manejar el éxito, como redirigir al usuario, limpiar el formulario, etc.
-        setSuccess('Registro exitoso');
-        setError('');
-        onClose(); // Cerrar el modal de registro si es exitoso
+        Swal.fire({
+          title: 'Registro exitoso',
+          text: 'Tu cuenta ha sido creada con éxito.',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(() => {
+          onClose(); // Cerrar el modal de registro si es exitoso
+        });
       }
     } catch (error) {
       if (error.response) {
         setError(error.response.data.message || 'Error al registrar');
+        Swal.fire({
+          title: 'Error',
+          text: error.response.data.message || 'Error al registrar',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
       } else {
         setError('Error de conexión');
+        Swal.fire({
+          title: 'Error de conexión',
+          text: 'No se pudo conectar con el servidor.',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
       }
     }
   };
@@ -45,7 +68,9 @@ export function Register({ onClose }) {
   return (
     <div className="register-overlay">
       <div className="register-modal">
-        <button className="register-close-button"><Link to ="/">X</Link></button>
+        <button className="register-close-button">
+          <Link to="/">X</Link>
+        </button>
         <h2 className="register-title">Registro</h2>
         <form className="register-form" onSubmit={handleSubmit}>
           <div className="form-group">
@@ -68,7 +93,7 @@ export function Register({ onClose }) {
               id="email"
               name="email"
               className="register-input"
-              placeholder="Ingresa tu correo electronico"
+              placeholder="Ingresa tu correo electrónico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -101,10 +126,11 @@ export function Register({ onClose }) {
             />
           </div>
           {error && <p className="register-error">{error}</p>}
-          {success && <p className="register-success">{success}</p>}
           <button type="submit" className="register-submit">Registrarse</button>
         </form>
-        <p className="register-login">¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link></p>
+        <p className="register-login">
+          ¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link>
+        </p>
       </div>
     </div>
   );

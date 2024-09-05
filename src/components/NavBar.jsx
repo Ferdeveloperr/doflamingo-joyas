@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../context/User';
 import axios from 'axios';
+import Swal from 'sweetalert2'; // Importar SweetAlert2
 import '../assets/icons.js';
 import './navbar.css';
 
@@ -11,11 +12,9 @@ export function NavBar({ products = [] }) {
   const { user, setUser } = useContext(UserContext); // Accede a la función de logout desde el contexto
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la visibilidad del modal
 
-
   useEffect(() => {
     // Intenta obtener los datos del usuario desde el localStorage al cargar el componente
     const token = localStorage.getItem('token');
-    console.log(token);
     if (token) {
       // Suponiendo que tienes un endpoint para obtener datos del usuario por token
       axios.get('http://localhost:5000/me', {
@@ -24,9 +23,7 @@ export function NavBar({ products = [] }) {
         }
       })
       .then(response => {
-       
         setUser(response.data); // Actualiza el contexto con los datos del usuario
-        console.log('Usuario obtenido:', response.data); // Verifica que el usuario se obtenga correctamente
       })
       .catch(error => {
         console.error('Error al obtener los datos del usuario:', error);
@@ -45,8 +42,6 @@ export function NavBar({ products = [] }) {
       const filteredProducts = products.filter(product =>
         product.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
-
-      console.log('Productos filtrados:', filteredProducts);
 
       if (filteredProducts.length > 0) {
         const firstProductElement = document.getElementById(`product-${filteredProducts[0].id}`);
@@ -70,9 +65,24 @@ export function NavBar({ products = [] }) {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    setUser(null);
-    setIsModalOpen(false); // Cierra el modal después de cerrar sesión
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Quieres cerrar sesión?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, cerrar sesión',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('token');
+        setUser(null);
+        setIsModalOpen(false); // Cierra el modal después de cerrar sesión
+        // Redireccionar al usuario a la página de inicio después de cerrar sesión
+        window.location.href = '/';
+      }
+    });
   };
 
   const scrollToAbout = () => {

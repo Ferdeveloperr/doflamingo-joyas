@@ -2,6 +2,7 @@ import './Login.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -21,16 +22,33 @@ export function Login() {
       if (response.status === 200) {
         // Aquí puedes manejar el éxito, como guardar el token, redirigir al usuario, etc.
         localStorage.setItem('token', response.data.token);
-        console.log('Login successful:', response.data);
-        navigate('/');
-        window.location.reload();
-        
+        Swal.fire({
+          title: 'Inicio de sesión exitoso',
+          text: 'Bienvenido de nuevo.',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(() => {
+          navigate('/');
+          window.location.reload();
+        });
       } 
     } catch (error) {
       if (error.response) {
         setError(error.response.data.message || 'Error al iniciar sesión');
+        Swal.fire({
+          title: 'Error',
+          text: error.response.data.message || 'Error al iniciar sesión',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
       } else {
         setError('Error de conexión');
+        Swal.fire({
+          title: 'Error de conexión',
+          text: 'No se pudo conectar con el servidor.',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
       }
     }
   };
@@ -38,9 +56,9 @@ export function Login() {
   return (
     <div className="login-overlay">
       <div className="login-container">
-        
-        <button className="login-close-button"><Link to="/">X </Link></button>
-       
+        <button className="login-close-button">
+          <Link to="/">X</Link>
+        </button>
         <h2 className="login-title">Iniciar sesión</h2>
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group">
@@ -50,7 +68,7 @@ export function Login() {
               id="login-email"
               name="email"
               className="login-input"
-              placeholder="Ingresa tu correo electronico"
+              placeholder="Ingresa tu correo electrónico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -72,9 +90,22 @@ export function Login() {
           {error && <p className="login-error">{error}</p>}
           <button type="submit" className="login-submit">Iniciar sesión</button>
         </form>
-        <p className="login-password-reset"><Link to="/forgot-password">Olvidé mi contraseña</Link></p>
-        <p className="login-signup">¿No tienes cuenta? <Link to="/register">Regístrate</Link></p>
+        <p className="login-password-reset">
+          <Link to="/forgot-password">Olvidé mi contraseña</Link>
+        </p>
+        <p className="login-signup">
+          ¿No tienes cuenta? <Link to="/register">Regístrate</Link>
+        </p>
       </div>
     </div>
   );
 }
+
+
+
+
+
+
+
+
+

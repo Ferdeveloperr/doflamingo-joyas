@@ -5,14 +5,14 @@ import { ProductCard } from './ProductCard';
 import axios from 'axios';
 
 export function Products() {
-    const { addToCart, cart = [], removeFromCart } = useCart();
+    const { addToCart, cart, removeFromCart } = useCart();
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        // Realiza la solicitud al backend para obtener los productos
-        axios.get('http://localhost:5000/api/products')  // Asegúrate de que la URL coincida con la de tu backend
+        axios.get('http://localhost:5000/api/products')
             .then(response => {
-                setProducts(response.data);  // Guarda los productos en el estado
+                setProducts(response.data);
+                console.log('Fetched products:', response.data);
             })
             .catch(error => {
                 console.error('Error fetching products:', error);
@@ -27,6 +27,7 @@ export function Products() {
         <main className='products'>
             <ul>
                 {products.map((product) => {
+                    console.log('Rendering product:', product);
                     const isProductInCart = checkProductInCart(product);
 
                     return (
