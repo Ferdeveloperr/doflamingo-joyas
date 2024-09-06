@@ -15,7 +15,7 @@ export function CustomForm() {
     // Muestra la alerta de éxito con SweetAlert2
     Swal.fire({
       title: 'Solicitud enviada',
-      text: 'Tu solicitud de diseño personalizado ha sido enviada con éxito.',
+      text: 'Tu solicitud de diseño personalizado ha sido enviada con éxito, nos comunicaremos contigo lo antes posible.',
       icon: 'success',
       confirmButtonText: 'Aceptar'
     });
