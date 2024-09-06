@@ -1,14 +1,33 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Swal from 'sweetalert2';
 import { AddToCartIcon, RemoveFromCartIcon } from './Icons.jsx';
 import './productCard.css';
+import { UserContext } from '../context/User'; // Importa el contexto de usuario (ajusta la ruta según tu estructura)
 
 export function ProductCard({ product, addToCart, isProductInCart, removeFromCart }) {
     const [isExpanded, setIsExpanded] = useState(false);
+    const { user } = useContext(UserContext); // Accede al contexto del usuario para verificar si está logueado
+
     const shortDescription = product.description.split(' ').slice(0, 3).join(' ') + '...';
-    console.log(product)
 
     const handleAddToCart = () => {
+        if (!user) {
+            Swal.fire({
+                title: 'Inicia sesión',
+                text: 'Necesitas iniciar sesión para agregar productos al carrito.',
+                icon: 'warning',
+                confirmButtonText: 'Iniciar sesión',
+                cancelButtonText: 'Cancelar',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirige al usuario a la página de inicio de sesión
+                    window.location.href = '/login';
+                }
+            });
+            return;
+        }
+
         addToCart(product);
         Swal.fire({
             title: '¡Producto agregado!',
@@ -19,6 +38,23 @@ export function ProductCard({ product, addToCart, isProductInCart, removeFromCar
     };
 
     const handleRemoveFromCart = () => {
+        if (!user) {
+            Swal.fire({
+                title: 'Inicia sesión',
+                text: 'Necesitas iniciar sesión para eliminar productos del carrito.',
+                icon: 'warning',
+                confirmButtonText: 'Iniciar sesión',
+                cancelButtonText: 'Cancelar',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirige al usuario a la página de inicio de sesión
+                    window.location.href = '/login';
+                }
+            });
+            return;
+        }
+
         removeFromCart(product);
         Swal.fire({
             title: '¡Producto eliminado!',
@@ -48,13 +84,10 @@ export function ProductCard({ product, addToCart, isProductInCart, removeFromCar
                         <button
                             className="text-pink-500 text-sm font-semibold"
                             onClick={() => setIsExpanded(!isExpanded)}>
-
-                        {isExpanded ? 'Ver menos' : 'Ver más'}
-
+                            {isExpanded ? 'Ver menos' : 'Ver más'}
                         </button>
                     </div>
-            </div>
-
+                </div>
             </div>
             <div className="px-6 pt-2 pb-4 flex justify-center">
                 <button 
