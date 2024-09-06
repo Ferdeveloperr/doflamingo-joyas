@@ -9,21 +9,19 @@ import './navbar.css';
 
 export function NavBar({ products = [] }) {
   const [searchTerm, setSearchTerm] = useState('');
-  const { user, setUser } = useContext(UserContext); // Accede a la función de logout desde el contexto
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la visibilidad del modal
+  const { user, setUser } = useContext(UserContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // Intenta obtener los datos del usuario desde el localStorage al cargar el componente
     const token = localStorage.getItem('token');
     if (token) {
-      // Suponiendo que tienes un endpoint para obtener datos del usuario por token
       axios.get('http://localhost:5000/me', {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
       .then(response => {
-        setUser(response.data); // Actualiza el contexto con los datos del usuario
+        setUser(response.data);
       })
       .catch(error => {
         console.error('Error al obtener los datos del usuario:', error);
@@ -39,9 +37,12 @@ export function NavBar({ products = [] }) {
     event.preventDefault();
 
     if (products.length > 0) {
-      const filteredProducts = products.filter(product =>
-        product.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      const filteredProducts = products.filter(product => {
+        const title = product.title || '';
+        console.log(title);
+        console.log(searchTerm);
+        return title.toLowerCase().includes(searchTerm.toLowerCase());
+      });
 
       if (filteredProducts.length > 0) {
         const firstProductElement = document.getElementById(`product-${filteredProducts[0].id}`);
@@ -57,11 +58,11 @@ export function NavBar({ products = [] }) {
   };
 
   const handleUserIconClick = () => {
-    setIsModalOpen(true); // Abre el modal al hacer clic en el ícono de usuario
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false); // Cierra el modal
+    setIsModalOpen(false);
   };
 
   const handleLogout = () => {
@@ -78,8 +79,7 @@ export function NavBar({ products = [] }) {
       if (result.isConfirmed) {
         localStorage.removeItem('token');
         setUser(null);
-        setIsModalOpen(false); // Cierra el modal después de cerrar sesión
-        // Redireccionar al usuario a la página de inicio después de cerrar sesión
+        setIsModalOpen(false);
         window.location.href = '/';
       }
     });

@@ -1,48 +1,38 @@
 import './Products.css';
-import { useState, useEffect } from 'react';
-import { useCart } from '../hooks/useCart.js';
+import { useProducts } from '../hooks/useProducts'; // Asegúrate de que la ruta sea correcta
 import { ProductCard } from './ProductCard';
-import axios from 'axios';
+import { useCart } from '../hooks/useCart.js';
+
+// En el archivo Products.jsx
 
 export function Products() {
     const { addToCart, cart, removeFromCart } = useCart();
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        axios.get('http://localhost:5000/api/products')
-            .then(response => {
-                setProducts(response.data);
-                console.log('Fetched products:', response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching products:', error);
-            });
-    }, []);
-
-    
-
+    const { products } = useProducts(); // Usa el hook useProducts para obtener los productos
+  
     const checkProductInCart = (product) => {
-        return cart.some((item) => item._id === product._id);
+      return cart.some((item) => item._id === product._id);
     };
-
+  
     return (
-        <main className='products'>
-            <ul>
-                {products.map((product) => {
-                    console.log('Rendering product:', product);
-                    const isProductInCart = checkProductInCart(product);
-
-                    return (
-                        <ProductCard 
-                            key={product._id} 
-                            product={product} 
-                            addToCart={addToCart} 
-                            isProductInCart={isProductInCart} 
-                            removeFromCart={removeFromCart} 
-                        />
-                    );
-                })}
-            </ul>
-        </main>
+      <main className='products'>
+        <ul>
+          {products.map((product) => {
+            console.log('Rendering product:', product);
+            const isProductInCart = checkProductInCart(product);
+  
+            return (
+              <li key={product._id} id={`product-${product._id}`}>
+                <ProductCard 
+                  product={product} 
+                  addToCart={addToCart} 
+                  isProductInCart={isProductInCart} 
+                  removeFromCart={removeFromCart} 
+                />
+              </li>
+            );
+          })}
+        </ul>
+      </main>
     );
-}
+  }
+  

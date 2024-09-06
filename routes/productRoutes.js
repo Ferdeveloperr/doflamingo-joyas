@@ -3,15 +3,27 @@ import Product from '../models/Product.js';
 
 const router = express.Router();
 
-// Obtener todos los productos
+// Obtener productos con filtrado
 router.get('/', async (req, res) => {
   try {
-    const products = await Product.find(); // Obtiene todos los productos de la base de datos
+    const { minPrice = 0, category = 'Todas' } = req.query;
+    
+    // Construir el objeto de filtros
+    const filter = {
+      price: { $gte: minPrice },
+    };
+    
+    if (category !== 'Todas') {
+      filter.category = category;
+    }
+
+    const products = await Product.find(filter); // Aplica los filtros en la consulta
     res.json(products);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener los productos' });
   }
 });
+
 
 // Obtener un producto por su ID
 router.get('/:id', async (req, res) => {
@@ -37,5 +49,7 @@ router.post('/details', async (req, res) => {
     res.status(500).json({ error: 'Error al obtener los productos' });
   }
 });
+
+
 
 export default router;
