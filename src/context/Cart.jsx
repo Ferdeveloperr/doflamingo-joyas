@@ -6,6 +6,7 @@ export const CartContext = createContext();
 export function CartProvider({ children }) {
     const [cart, setCart] = useState([]);
     const [productDetails, setProductDetails] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
         const fetchCart = async () => {
@@ -22,6 +23,9 @@ export function CartProvider({ children }) {
 
                 if (response.headers['content-type'].includes('application/json')) {
                     setCart(response.data.products);
+                    setTotalPrice(response.data.totalPrice); // Actualizar el totalPrice
+                    const productIds = response.data.products.map(item => item.productId);
+                    fetchProductDetails(productIds); // Cargar los detalles de los productos cuando se carga el carrito
                 } else {
                     console.error('La respuesta no es un JSON', response);
                 }
@@ -58,6 +62,9 @@ export function CartProvider({ children }) {
             });
 
             setCart(response.data.products);
+            setTotalPrice(response.data.totalPrice); // Actualizar el totalPrice
+            const productIds = response.data.products.map(item => item.productId); // Asegura que los detalles se actualicen
+            fetchProductDetails(productIds); // Llamar nuevamente a fetchProductDetails para actualizar los detalles
         } catch (error) {
             console.error('Error al agregar producto al carrito', error);
         }
@@ -75,6 +82,9 @@ export function CartProvider({ children }) {
                 }
             });
             setCart(response.data.products);
+            setTotalPrice(response.data.totalPrice); // Actualizar el totalPrice
+            const productIds = response.data.products.map(item => item.productId); // Asegura que los detalles se actualicen
+            fetchProductDetails(productIds); // Actualiza los detalles después de eliminar
         } catch (error) {
             console.error('Error al eliminar el producto del carrito', error);
         }
@@ -91,13 +101,15 @@ export function CartProvider({ children }) {
             });
 
             setCart([]);
+            setTotalPrice(0); // Limpiar el totalPrice cuando el carrito esté vacío
+            setProductDetails([]); // Limpiar detalles del producto cuando el carrito esté vacío
         } catch (error) {
             console.error('Error al limpiar el carrito', error);
         }
     };
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, fetchProductDetails, productDetails }}>
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, productDetails, totalPrice }}>
             {children}
         </CartContext.Provider>
     );

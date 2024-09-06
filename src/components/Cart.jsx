@@ -14,23 +14,28 @@ function CartItem({ thumbnail, name, price, quantity, removeFromCart }) {
             confirmButtonText: 'Ok'
         });
     };
+    console.log('Thumbnail URL:', thumbnail);
 
     return (
         <li className="cart-item">
-            <img className="cart-item-img" src={thumbnail} alt={name} />
+            <div className="cart-item-img">
+                <img src={thumbnail} alt={name} />
+            </div>
             <div className="cart-item-details">
                 <strong className="cart-item-title">{name}</strong>
                 <p className="cart-item-price">${price}</p>
                 <small>Cantidad: {quantity}</small>
             </div>
-            <button className="cart-item-remove" onClick={handleRemove}>Eliminar</button>
+            <div className="buttonDelete">
+                <button className="cart-item-remove" onClick={handleRemove}>Eliminar</button>
+            </div>
         </li>
     );
 }
 
 export function Cart() {
     const cartCheckboxId = useId();
-    const { cart, clearCart, removeFromCart } = useCart();
+    const { cart, clearCart, removeFromCart, productDetails, totalPrice } = useCart();  // Agregado totalPrice desde el hook
 
     const handleClearCart = () => {
         Swal.fire({
@@ -62,24 +67,36 @@ export function Cart() {
             <aside className='cart'>
                 <ul>
                     {cart.length > 0 ? (
-                        cart.map(product => (
-                            <CartItem
-                                key={product._id}
-                                name={product.name}
-                                thumbnail={product.imageUrl}
-                                price={product.price}
-                                quantity={product.quantity}
-                                removeFromCart={() => removeFromCart(product)}
-                            />
-                        ))
+                        cart.map(cartItem => {
+                            const product = productDetails.find(p => p._id === cartItem.productId);
+                            return product ? (
+                                <CartItem
+                                    key={cartItem._id}
+                                    name={product.name}
+                                    thumbnail={product.imageUrl}
+                                    price={product.price}
+                                    quantity={cartItem.quantity}
+                                    removeFromCart={() => removeFromCart(cartItem)}
+                                />
+                            ) : null;
+                        })
                     ) : (
                         <li>Tu carrito está vacío.</li>
                     )}
                 </ul>
 
-                <button className='ButtonStyle' onClick={handleClearCart}>
-                    <ClearCartIcon />
-                </button>
+                {/* Mostrar el precio total que viene desde el backend */}
+                {cart.length > 0 && (
+                    <div className="cart-total">
+                        <strong>Total: ${totalPrice}</strong> {/* Mostrar el totalPrice */}
+                    </div>
+                )}
+
+                {cart.length > 0 && (
+                    <button className='ButtonStyle' onClick={handleClearCart}>
+                        <ClearCartIcon />
+                    </button>
+                )}
             </aside>
         </>
     );

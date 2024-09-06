@@ -19,6 +19,8 @@ export function Products() {
             });
     }, []);
 
+    
+
     const checkProductInCart = (product) => {
         return cart.some((item) => item._id === product._id);
     };
