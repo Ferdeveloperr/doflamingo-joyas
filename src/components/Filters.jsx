@@ -19,7 +19,7 @@ export function Filters() {
   };
 
   // Definir las categorías
-  const categories = ['Todas', 'Anillos', 'Pulseras', 'Joyas'];
+  const categories = ['Todas', 'Anillos', 'Pulseras', 'Collar'];
 
   return (
     <section className="filters">

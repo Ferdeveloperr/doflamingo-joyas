@@ -1,16 +1,18 @@
 import { useState, useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Link  } from 'react-router-dom';
 import { UserContext } from '../context/User';
 import axios from 'axios';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
 import '../assets/icons.js';
 import './navbar.css';
 
+
 export function NavBar({ products = [] }) {
   const [searchTerm, setSearchTerm] = useState('');
   const { user, setUser } = useContext(UserContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
+ 
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -35,25 +37,46 @@ export function NavBar({ products = [] }) {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
-
+    console.log("Prevented default submit");
     if (products.length > 0) {
       const filteredProducts = products.filter(product => {
-        const title = product.title || '';
-        console.log(title);
-        console.log(searchTerm);
+        const title = product.name || '';
         return title.toLowerCase().includes(searchTerm.toLowerCase());
       });
-
+  
       if (filteredProducts.length > 0) {
-        const firstProductElement = document.getElementById(`product-${filteredProducts[0].id}`);
+        const firstProductElement = document.getElementById(`product-${filteredProducts[0]._id}`);
         if (firstProductElement) {
           firstProductElement.scrollIntoView({ behavior: 'smooth' });
         }
       } else {
-        alert('No se encontraron productos que coincidan con tu búsqueda');
+        // Si no se encuentran productos, muestra un SweetAlert
+        Swal.fire({
+          title: 'No se encontraron productos',
+          text: '¿Deseas hacer un pedido personalizado?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Hacer pedido personalizado',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            scrollToCustom(); // Desplaza a la sección personalizada
+          }
+        });
       }
     } else {
-      alert('No hay productos disponibles para buscar');
+      // Si no hay productos disponibles
+      Swal.fire({
+        title: 'No hay productos disponibles',
+        text: 'Por favor, inténtalo más tarde o haz un pedido personalizado.',
+        icon: 'info',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Hacer pedido personalizado',
+      }).then(() => {
+        scrollToCustom(); // Desplaza a la sección personalizada
+      });
     }
   };
 
@@ -106,6 +129,7 @@ export function NavBar({ products = [] }) {
     }
   };
 
+  
   return (
     <div className='containner'>
       <nav className="bg-black">
