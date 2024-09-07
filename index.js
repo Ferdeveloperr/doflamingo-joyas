@@ -5,6 +5,7 @@ import cors from 'cors';
 import userRoutes from './routes/userRoutes.js'; // Aquí importamos la exportación por defecto
 import cartRoutes from './routes/cartRoutes.js'; // Importa las rutas del carrito
 import productRoutes from './routes/productRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 import bodyParser from 'body-parser';
 
 
@@ -29,6 +30,8 @@ app.use('/', userRoutes);
 app.use('/api/cart', cartRoutes); 
 // Usa las rutas de los productos
 app.use('/api/products', productRoutes);
+// Usa las rutas de los pedidos
+app.use('/api', orderRoutes); // Rutas de órdenes
 
 // Conectar a MongoDB
 mongoose.connect(process.env.MONGODB_URI)

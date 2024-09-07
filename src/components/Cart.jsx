@@ -1,8 +1,12 @@
+import { useState } from 'react';
+import Modal from 'react-modal';
 import { useId } from 'react';
 import Swal from 'sweetalert2';
 import { ClearCartIcon, CartIcon } from "./Icons.jsx";
 import './Cart.css';
 import { useCart } from "../hooks/useCart.js";
+import Checkout from './Checkout'; // Importa el componente Checkout
+
 
 function CartItem({ thumbnail, name, price, quantity, removeFromCart }) {
     const handleRemove = () => {
@@ -14,7 +18,6 @@ function CartItem({ thumbnail, name, price, quantity, removeFromCart }) {
             confirmButtonText: 'Ok'
         });
     };
-    console.log('Thumbnail URL:', thumbnail);
 
     return (
         <li className="cart-item">
@@ -35,7 +38,8 @@ function CartItem({ thumbnail, name, price, quantity, removeFromCart }) {
 
 export function Cart() {
     const cartCheckboxId = useId();
-    const { cart, clearCart, removeFromCart, productDetails, totalPrice } = useCart();  // Agregado totalPrice desde el hook
+    const { cart, clearCart, removeFromCart, productDetails, totalPrice } = useCart();
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const handleClearCart = () => {
         Swal.fire({
@@ -56,6 +60,9 @@ export function Cart() {
             }
         });
     };
+
+    const openModal = () => setModalIsOpen(true);
+    const closeModal = () => setModalIsOpen(false);
 
     return (
         <>
@@ -85,19 +92,34 @@ export function Cart() {
                     )}
                 </ul>
 
-                {/* Mostrar el precio total que viene desde el backend */}
                 {cart.length > 0 && (
                     <div className="cart-total">
-                        <strong>Total: ${totalPrice}</strong> {/* Mostrar el totalPrice */}
+                        <strong>Total: ${totalPrice}</strong>
                     </div>
                 )}
 
                 {cart.length > 0 && (
-                    <button className='ButtonStyle' onClick={handleClearCart}>
-                        <ClearCartIcon />
-                    </button>
+                    <>
+                        <button className='ButtonStyle' onClick={handleClearCart}>
+                            <ClearCartIcon />
+                        </button>
+                        <button className='ButtonStyle' onClick={openModal}>
+                            Ir a Checkout
+                        </button>
+                    </>
                 )}
             </aside>
+
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Checkout Modal"
+                className="checkout-modal"
+                overlayClassName="checkout-overlay"
+            >
+                <button onClick={closeModal} className="modal-close-button">X</button>
+                <Checkout />
+            </Modal>
         </>
     );
 }
