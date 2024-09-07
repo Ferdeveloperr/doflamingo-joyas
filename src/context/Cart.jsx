@@ -55,6 +55,7 @@ export function CartProvider({ children }) {
             const response = await axios.post('http://localhost:5000/api/cart/add', {
                 productId: product._id,
                 quantity: 1
+                  
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
