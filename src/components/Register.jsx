@@ -1,15 +1,17 @@
 import './Register.css'; 
 import { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-export function Register({ onClose }) {
+export function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+
+  const navigate = useNavigate(); // Hook para redireccionar
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,14 +36,14 @@ export function Register({ onClose }) {
       });
 
       if (response.status === 201) {
-        // Aquí puedes manejar el éxito, como redirigir al usuario, limpiar el formulario, etc.
+        // Redirigir al usuario a la página de inicio de sesión
         Swal.fire({
           title: 'Registro exitoso',
           text: 'Tu cuenta ha sido creada con éxito.',
           icon: 'success',
           confirmButtonText: 'Ok'
         }).then(() => {
-          onClose(); // Cerrar el modal de registro si es exitoso
+          navigate('/login'); // Redirigir a la página de inicio de sesión
         });
       }
     } catch (error) {

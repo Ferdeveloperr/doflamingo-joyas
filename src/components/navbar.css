@@ -69,9 +69,10 @@
   }
 
   .login-style {
-    font-size: 0.75rem; /* Tamaño del texto más pequeño */
+    font-size: 0.60rem; /* Tamaño del texto más pequeño */
     text-align: center; /* Alineación centrada debajo del ícono */
     white-space: nowrap; /* Evita que el texto se envuelva */
+    
   }
   
   .flex-col {

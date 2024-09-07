@@ -21,3 +21,18 @@ export const updateOrder = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
+// Controlador para verificar si el usuario tiene una orden pendiente
+export const checkPendingOrder = async (req, res) => {
+  try {
+    const order = await Order.findOne({ userId: req.params.userId, status: 'pending' });
+
+    if (order) {
+      res.json({ hasPendingOrder: true, order });
+    } else {
+      res.json({ hasPendingOrder: false });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
