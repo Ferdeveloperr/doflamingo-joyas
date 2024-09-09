@@ -1,30 +1,30 @@
 import { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useCart } from '../hooks/useCart';
-import { UserContext } from '../context/User'; // Importar el UserContext
-import Swal from 'sweetalert2'; // Importar SweetAlert2
-import './Checkout.css'; // Importa el archivo CSS
-import OrderModal from './OrderModal'; // Importa el componente modal
+import { UserContext } from '../context/User'; 
+import Swal from 'sweetalert2'; 
+import './Checkout.css'; 
+import OrderModal from './OrderModal';
 
 const Checkout = () => {
-    const { cart, totalPrice } = useCart(); // Obtener el carrito y el totalPrice del contexto
-    const { user } = useContext(UserContext); // Obtener el usuario desde el UserContext
+    const { cart, totalPrice } = useCart(); 
+    const { user } = useContext(UserContext); 
     const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState(''); 
     const [phoneNumber, setPhoneNumber] = useState('');
     const [shippingAddress, setShippingAddress] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('credit_card');
     const [loading, setLoading] = useState(false);
-    const [pendingOrder, setPendingOrder] = useState(null); // Nuevo estado para la orden pendiente
-    const [showOrderModal, setShowOrderModal] = useState(false); // Nuevo estado para mostrar el modal
+    const [pendingOrder, setPendingOrder] = useState(null); 
+    const [showOrderModal, setShowOrderModal] = useState(false);
 
     useEffect(() => {
         if (user && user._id) {
             axios.get(`http://localhost:5000/api/orders/pending/${user._id}`)
                 .then(response => {
                     if (response.data.hasPendingOrder) {
-                        console.log('Orden pendiente:', response.data.order);
-                        setPendingOrder(response.data.order); // Guardar la orden pendiente en el estado
-                        setShowOrderModal(true); // Mostrar el modal con la orden pendiente
+                        setPendingOrder(response.data.order); 
+                        setShowOrderModal(true); 
                     }
                 })
                 .catch(error => {
@@ -32,6 +32,10 @@ const Checkout = () => {
                 });
         }
     }, [user]);
+
+    const handleCloseModal = () => {
+        setShowOrderModal(false); // Asegurarse de cerrar el modal correctamente
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -51,16 +55,16 @@ const Checkout = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Usuario No Autenticado',
-                text: 'El usuario no está autenticado.',
+                text: 'Por favor, inicia sesión para continuar con la compra.',
             });
             setLoading(false);
             return;
         }
 
         const order = {
-            userId: user._id, // Obtener el ID del usuario desde el contexto
+            userId: user._id, 
             products: cart.map(product => ({
-                productId: product.productId, // Asegúrate de que uses productId
+                productId: product.productId, 
                 quantity: product.quantity,
             })),
             totalPrice: totalPrice,
@@ -69,16 +73,29 @@ const Checkout = () => {
             shippingAddress: shippingAddress,
             fullName: fullName,
             phoneNumber: phoneNumber,
+            email: email, 
         };
 
         try {
             const response = await axios.post('http://localhost:5000/api/orders', order, {
                 headers: {
-                    'Content-Type': 'application/json', // Asegúrate de que este encabezado esté presente
+                    'Content-Type': 'application/json',
                 },
             });
+
+            // Mostrar SweetAlert de éxito si se crea la orden correctamente
+            Swal.fire({
+                icon: 'success',
+                title: 'Orden Creada',
+                text: 'Tu orden ha sido creada exitosamente. Serás redirigido a la página de pago.',
+                showConfirmButton: false,
+                timer: 3000,
+            });
+
             const paymentUrl = response.data.paymentUrl;
-            window.location.href = paymentUrl; // Redirige al usuario a la página de pago
+            setTimeout(() => {
+                window.location.href = paymentUrl; // Redirige al usuario a la página de pago después de 3 segundos
+            }, 3000);
         } catch (error) {
             Swal.fire({
                 icon: 'error',
@@ -93,8 +110,8 @@ const Checkout = () => {
 
     return (
         <div className="checkout-container">
-            {showOrderModal && <OrderModal order={pendingOrder} onClose={() => setShowOrderModal(false)} />}
-            {!showOrderModal && (
+            {showOrderModal && <OrderModal order={pendingOrder} onClose={handleCloseModal} />}
+            {!pendingOrder && !showOrderModal && (
                 <>
                     <h2>Checkout</h2>
                     <form onSubmit={handleSubmit}>
@@ -103,7 +120,18 @@ const Checkout = () => {
                             <input
                                 type="text"
                                 value={fullName}
+                                placeholder='Ingrese su nombre y apellido'
                                 onChange={(e) => setFullName(e.target.value)}
+                                required
+                            />
+                        </label>
+                        <label>
+                            Correo Electrónico: 
+                            <input
+                                type="email"
+                                value={email}
+                                placeholder='Ingrese su correo electronico'
+                                onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
                         </label>
@@ -112,6 +140,7 @@ const Checkout = () => {
                             <input
                                 type="text"
                                 value={phoneNumber}
+                                placeholder='Ingrese su numero de telefono'
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                                 required
                             />
@@ -121,6 +150,7 @@ const Checkout = () => {
                             <input
                                 type="text"
                                 value={shippingAddress}
+                                placeholder='Ingrese su direccion de envío'
                                 onChange={(e) => setShippingAddress(e.target.value)}
                                 required
                             />

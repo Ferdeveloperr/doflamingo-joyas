@@ -1,5 +1,4 @@
-
-import './OrderModal.css'; // Asegúrate de tener un archivo CSS para estilos del modal
+import './OrderModal.css'; 
 
 const OrderModal = ({ order, onClose }) => {
     if (!order) return null;
@@ -7,16 +6,42 @@ const OrderModal = ({ order, onClose }) => {
     return (
         <div className="order-modal-overlay">
             <div className="order-modal-content">
-                <button className="order-modal-close-button" onClick={onClose}>X</button>
-                <h2>Orden Pendiente</h2>
-                <p><strong>ID de la Orden:</strong> {order._id}</p>
-                <p><strong>Estado:</strong> {order.status}</p>
-                <p><strong>Fecha:</strong> {new Date(order.createdAt).toLocaleDateString()}</p>
-                <p><strong>Total:</strong> ${order.totalPrice}</p>
-                <p><strong>Dirección de Envío:</strong> {order.shippingAddress}</p>
-                <p><strong>Nombre Completo:</strong> {order.fullName}</p>
-                <p><strong>Número de Teléfono:</strong> {order.phoneNumber}</p>
-                <p><strong>Método de Pago:</strong> {order.paymentMethod}</p>
+                <button className="order-modal-close-button" onClick={onClose}>✖</button>
+                <h2>Resumen de tu Orden Pendiente</h2>
+                <div className="order-info-container">
+                    <div className="order-info-item">
+                        <h3>ID de la Orden:</h3>
+                        <p>{order._id}</p>
+                    </div>
+                    <div className="order-info-item">
+                        <h3>Estado:</h3>
+                        <p className={`status-${order.status}`}>{order.status}</p>
+                    </div>
+                    <div className="order-info-item">
+                        <h3>Fecha de creación:</h3>
+                        <p>{new Date(order.createdAt).toLocaleDateString()}</p>
+                    </div>
+                    <div className="order-info-item">
+                        <h3>Total:</h3>
+                        <p>${order.totalPrice}</p>
+                    </div>
+                    <div className="order-info-item">
+                        <h3>Dirección de Envío:</h3>
+                        <p>{order.shippingAddress}</p>
+                    </div>
+                    <div className="order-info-item">
+                        <h3>Nombre Completo:</h3>
+                        <p>{order.fullName}</p>
+                    </div>
+                    <div className="order-info-item">
+                        <h3>Número de Teléfono:</h3>
+                        <p>{order.phoneNumber}</p>
+                    </div>
+                    <div className="order-info-item">
+                        <h3>Método de Pago:</h3>
+                        <p>{order.paymentMethod === 'credit_card' ? 'Tarjeta de Crédito' : 'PayPal'}</p>
+                    </div>
+                </div>
             </div>
         </div>
     );
