@@ -77,13 +77,23 @@ const Checkout = () => {
         };
 
         try {
+            // Enviar la orden al backend
             const response = await axios.post('http://localhost:5000/api/orders', order, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
 
-            // Mostrar SweetAlert de éxito si se crea la orden correctamente
+            // Crear el pago en MercadoPago
+            const paymentResponse = await axios.post('http://localhost:5000/api/payment/create-payment', {
+                orderId: response.data.orderId,
+                amount: totalPrice,
+                email: email,
+            });
+
+            const { init_point } = paymentResponse.data;
+
+            // Mostrar alerta de éxito y redirigir al usuario
             Swal.fire({
                 icon: 'success',
                 title: 'Orden Creada',
@@ -92,9 +102,9 @@ const Checkout = () => {
                 timer: 3000,
             });
 
-            const paymentUrl = response.data.paymentUrl;
+            // Redirigir al usuario a la página de pago
             setTimeout(() => {
-                window.location.href = paymentUrl; // Redirige al usuario a la página de pago después de 3 segundos
+                window.location.href = init_point;
             }, 3000);
         } catch (error) {
             Swal.fire({
@@ -166,7 +176,9 @@ const Checkout = () => {
                                 <option value="paypal">PayPal</option>
                             </select>
                         </label>
-                        <button type="submit" disabled={loading}>Confirmar Orden</button>
+                        <button type="submit" disabled={loading}>
+                            {loading ? 'Procesando...' : 'Confirmar Orden'}
+                        </button>
                     </form>
                 </>
             )}
