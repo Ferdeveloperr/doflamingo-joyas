@@ -7,8 +7,8 @@ import Slider from 'react-slick';
 
 const carouselImages = [
   { src: './BannerCinco.png', alt: 'Promoción 1' },
-  { src: './public/bannerSeis.png', alt: 'Promoción 2' },
-  { src: './public/bannerTres.jpg', alt: 'Promoción 3' },
+  { src: './bannerSeis.png', alt: 'Promoción 2' },
+  { src: './bannerTres.jpg', alt: 'Promoción 3' },
 ];
 
 const settings = {
