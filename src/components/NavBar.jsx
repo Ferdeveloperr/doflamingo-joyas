@@ -136,7 +136,7 @@ export function NavBar({ products = [] }) {
         <div className="container mx-auto flex justify-between items-center h-18">
           <div className="flex items-center h-18">
             <Link to="/">
-              <img src="./logo-doflamingo.png" alt="Mi E-commerce" className="h-18 w-auto" />
+              <img src="./logo-doflamingo.png" alt="Mi E-commerce" className="h-17 w-auto" />
             </Link>
           </div>
           <div className="ml-4">
