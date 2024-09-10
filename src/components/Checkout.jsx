@@ -18,6 +18,7 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [pendingOrder, setPendingOrder] = useState(null);
   const [showOrderModal, setShowOrderModal] = useState(false);
+  const CLIENT_ID = "AXSG0Id7SFwyt_2uilTmgNhK4yPPreubcHvfplr-sEM6cDNgd_bcKUrXLPUVgMlVDinH3hhhKg2P-0tI";
 
   useEffect(() => {
     if (user && user._id) {
@@ -175,7 +176,7 @@ const Checkout = () => {
             </label>
 
             {paymentMethod === 'paypal' && (
-              <PayPalScriptProvider options={{ "client-id": "tu-client-id" }}>
+              <PayPalScriptProvider options={{ "client-id": CLIENT_ID }}>
                 <PayPalButtons
                   createOrder={(data, actions) => {
                     return actions.order.create({
