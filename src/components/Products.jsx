@@ -1,6 +1,6 @@
 import './Products.css';
-import { useProducts } from '../hooks/useProducts'; // Asegúrate de que la ruta sea correcta
-import { ProductCard } from './ProductCard';
+import { useProducts } from '../hooks/useProducts.js'; // Asegúrate de que la ruta sea correcta
+import { ProductCard } from './ProductCard.jsx';
 import { useCart } from '../hooks/useCart.js';
 
 // En el archivo Products.jsx

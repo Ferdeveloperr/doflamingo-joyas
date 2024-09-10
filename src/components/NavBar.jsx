@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link  } from 'react-router-dom';
-import { UserContext } from '../context/User';
+import { UserContext } from '../context/User.jsx';
 import axios from 'axios';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
 import '../assets/icons.js';

@@ -1,6 +1,6 @@
 // src/App.jsx
-import { FiltersProvider } from './context/Filters'; 
-import { useProducts } from './hooks/useProducts'; 
+import { FiltersProvider } from './context/Filters.jsx'; 
+import { useProducts } from './hooks/useProducts.js'; 
 import { Products } from './components/Products.jsx';
 import { Header } from './components/Header.jsx';
 import { Footer } from './components/Footer.jsx';

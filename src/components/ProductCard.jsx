@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import Swal from 'sweetalert2';
 import { AddToCartIcon, RemoveFromCartIcon } from './Icons.jsx';
 import './productCard.css';
-import { UserContext } from '../context/User'; // Importa el contexto de usuario (ajusta la ruta según tu estructura)
+import { UserContext } from '../context/User.jsx'; // Importa el contexto de usuario (ajusta la ruta según tu estructura)
 
 export function ProductCard({ product, addToCart, isProductInCart, removeFromCart }) {
     const [isExpanded, setIsExpanded] = useState(false);

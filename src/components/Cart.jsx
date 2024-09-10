@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { ClearCartIcon, CartIcon } from "./Icons.jsx";
 import './Cart.css';
 import { useCart } from "../hooks/useCart.js";
-import Checkout from './Checkout'; // Importa el componente Checkout
+import Checkout from './Checkout.jsx'; // Importa el componente Checkout
 
 
 function CartItem({ thumbnail, name, price, quantity, removeFromCart }) {
