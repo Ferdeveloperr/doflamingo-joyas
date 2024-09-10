@@ -104,7 +104,7 @@ export function Cart() {
                             <ClearCartIcon />
                         </button>
                         <button className='ButtonStyle' onClick={openModal}>
-                            Ir a Checkout
+                            Ir a Pagar
                         </button>
                     </>
                 )}
