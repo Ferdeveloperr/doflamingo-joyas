@@ -133,10 +133,10 @@ export function NavBar({ products = [] }) {
   return (
     <div className='containner'>
       <nav className="bg-black">
-        <div className="container mx-auto flex justify-between items-center h-16">
-          <div className="flex items-center h-16">
+        <div className="container mx-auto flex justify-between items-center h-18">
+          <div className="flex items-center h-18">
             <Link to="/">
-              <img src="./logo-doflamingo.png" alt="Mi E-commerce" className="h-16 w-auto" />
+              <img src="./logo-doflamingo.png" alt="Mi E-commerce" className="h-18 w-auto" />
             </Link>
           </div>
           <div className="ml-4">

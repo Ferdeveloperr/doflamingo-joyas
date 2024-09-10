@@ -190,3 +190,11 @@
         color: rgb(253, 128, 180);
     }
   }
+
+
+  @media (min-width: 768px) {
+    .containner img {
+      max-width: 100px; /* Ajusta el valor según lo que prefieras como tamaño máximo */
+      max-height: auto; /* Mantiene la proporción del logo */
+    }
+  }
