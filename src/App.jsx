@@ -1,12 +1,13 @@
 // src/App.jsx
-import { FiltersProvider } from './context/Filters'; // Asegúrate de importar el provider correcto
-import { useProducts } from './hooks/useProducts'; // Importa el nuevo hook
+import { FiltersProvider } from './context/Filters'; 
+import { useProducts } from './hooks/useProducts'; 
 import { Products } from './components/Products.jsx';
 import { Header } from './components/Header.jsx';
 import { Footer } from './components/Footer.jsx';
 import { Cart } from './components/Cart.jsx';
 import { CartProvider } from './context/Cart.jsx';
-import  Checkout  from './components/Checkout.jsx'; 
+import Checkout from './components/Checkout.jsx'; 
+import CheckoutSuccess from './components/CheckoutSuccess.jsx'; // Importa el componente de éxito
 import { Aside } from './components/Aside.jsx';
 import './components/global.css';
 import SimpleParallax from 'simple-parallax-js';
@@ -38,6 +39,7 @@ function App() {
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/checkout-success" element={<CheckoutSuccess />} /> {/* Nueva ruta para la página de éxito */}
             </Routes>
             <div className="flex">
               <Aside />

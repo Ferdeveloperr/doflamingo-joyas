@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import './Checkout.css';
 import OrderModal from './OrderModal';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
   const { cart, totalPrice } = useCart();
@@ -14,16 +15,18 @@ const Checkout = () => {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [shippingAddress, setShippingAddress] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('credit_card');
+  const [paymentMethod, setPaymentMethod] = useState('paypal');
   const [loading, setLoading] = useState(false);
   const [pendingOrder, setPendingOrder] = useState(null);
   const [showOrderModal, setShowOrderModal] = useState(false);
   const CLIENT_ID = "AXSG0Id7SFwyt_2uilTmgNhK4yPPreubcHvfplr-sEM6cDNgd_bcKUrXLPUVgMlVDinH3hhhKg2P-0tI";
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user && user._id) {
       axios.get(`http://localhost:5000/api/orders/pending/${user._id}`)
         .then(response => {
+            console.log('Respuesta de Verificación de Orden Pendiente:', response.data); // Log para verificar respuesta
           if (response.data.hasPendingOrder) {
             setPendingOrder(response.data.order);
             setShowOrderModal(true);
@@ -77,15 +80,16 @@ const Checkout = () => {
       email: email,
     };
 
-    try {
-        const response = await axios.post('http://localhost:5000/api/paypal/create-paypal-order', order, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        
+    console.log('Datos de la Orden:', order); // Log para verificar datos enviados
 
-      console.log(response.data); // Verifica la respuesta completa de la API
+    try {
+      const response = await axios.post('http://localhost:5000/api/paypal/create-paypal-order', order, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log('Respuesta de PayPal:', response.data); // Log para verificar respuesta de PayPal
 
       const paymentUrl = response.data.paymentUrl;
 
@@ -99,7 +103,7 @@ const Checkout = () => {
         });
 
         setTimeout(() => {
-          window.location.href = paymentUrl; // Redirige al usuario a la página de pago después de 3 segundos
+          window.location.href = paymentUrl;
         }, 3000);
       } else {
         throw new Error('No se obtuvo una URL de pago de PayPal');
@@ -114,7 +118,28 @@ const Checkout = () => {
     } finally {
       setLoading(false);
     }
-  }
+  };
+
+  const handleApprovePayPal = async (data, actions) => {
+    try {
+        console.log('Datos de PayPal al Aprobar:', data); // Log para verificar datos al aprobar
+      await actions.order.capture();
+      Swal.fire({
+        icon: 'success',
+        title: 'Pago Completado',
+        text: `Pago realizado con éxito.`,
+      });
+
+      navigate('/checkout-success'); // Redirige a una página de éxito
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al Completar el Pago',
+        text: error.message,
+      });
+      console.error('Error al capturar el pago:', error);
+    }
+  };
 
   return (
     <div className="checkout-container">
@@ -128,7 +153,7 @@ const Checkout = () => {
               <input
                 type="text"
                 value={fullName}
-                placeholder='Ingrese su nombre y apellido'
+                placeholder="Ingrese su nombre y apellido"
                 onChange={(e) => setFullName(e.target.value)}
                 required
               />
@@ -138,7 +163,7 @@ const Checkout = () => {
               <input
                 type="email"
                 value={email}
-                placeholder='Ingrese su correo electronico'
+                placeholder="Ingrese su correo electrónico"
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
@@ -148,7 +173,7 @@ const Checkout = () => {
               <input
                 type="text"
                 value={phoneNumber}
-                placeholder='Ingrese su numero de telefono'
+                placeholder="Ingrese su número de teléfono"
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 required
               />
@@ -158,7 +183,7 @@ const Checkout = () => {
               <input
                 type="text"
                 value={shippingAddress}
-                placeholder='Ingrese su direccion de envío'
+                placeholder="Ingrese su dirección de envío"
                 onChange={(e) => setShippingAddress(e.target.value)}
                 required
               />
@@ -179,6 +204,7 @@ const Checkout = () => {
               <PayPalScriptProvider options={{ "client-id": CLIENT_ID }}>
                 <PayPalButtons
                   createOrder={(data, actions) => {
+                    console.log('Datos de PayPal al Crear la Orden:', data); // Log para verificar datos al crear orden
                     return actions.order.create({
                       purchase_units: [{
                         amount: {
@@ -187,21 +213,15 @@ const Checkout = () => {
                       }],
                     });
                   }}
-                  onApprove={(data, actions) => {
-                    return actions.order.capture().then(details => {
-                      Swal.fire({
-                        icon: 'success',
-                        title: 'Pago Completado',
-                        text: `Pago realizado con éxito por ${details.payer.name.given_name}`,
-                      });
-                    });
-                  }}
+                  onApprove={handleApprovePayPal}
                 />
               </PayPalScriptProvider>
             )}
 
             {paymentMethod !== 'paypal' && (
-              <button type="submit" disabled={loading}>Confirmar Orden</button>
+              <button type="submit" disabled={loading}>
+                {loading ? 'Procesando...' : 'Confirmar Orden'}
+              </button>
             )}
           </form>
         </>

@@ -6,6 +6,8 @@
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   background-color: #f9f9f9;
+  max-height: 100vh; /* Limita la altura del modal */
+  overflow-y: auto; /* Permite scroll si el contenido excede la altura */
 }
 
 /* Estilo del título */
@@ -53,4 +55,14 @@
 
 .checkout-container button:hover:not(:disabled) {
   background-color: #218838;
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .checkout-container {
+    max-height: 100vh;
+    overflow-y: auto; /* Permite scroll si el contenido excede la altura */
+    width: 90%;
+    padding: 15px;
+  }
 }
