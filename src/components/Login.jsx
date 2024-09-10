@@ -16,7 +16,8 @@ export function Login() {
     setLoading(true); // Activa el loader
 
     try {
-      const response = await axios.post('http://localhost:5000/login', {
+      // Cambia la URL a la de tu backend desplegado
+      const response = await axios.post('https://doflamingo-joyas-backend.vercel.app/login', {
         email,
         password
       });
@@ -33,7 +34,7 @@ export function Login() {
             setLoading(false); // Desactiva el loader
             navigate('/');
             window.location.reload();
-          }, 2000); // Retraso de 1 segundo (1000 ms) antes de redirigir
+          }, 2000); // Retraso de 2 segundos (2000 ms) antes de redirigir
         });
       }
     } catch (error) {
