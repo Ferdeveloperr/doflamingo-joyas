@@ -123,7 +123,7 @@
   border-radius: 50%;
   cursor: pointer;
   display: flex;
-  height: 40px; /* Ajusté el tamaño del botón */
+  height: 25px; /* Ajusté el tamaño del botón */
   justify-content: center;
   padding: 6px;
   position: fixed;

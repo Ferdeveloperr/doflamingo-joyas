@@ -196,5 +196,6 @@
     .containner img {
       max-width: 100px; /* Ajusta el valor según lo que prefieras como tamaño máximo */
       max-height: auto; /* Mantiene la proporción del logo */
+      margin-left: 1rem; /* Ajusta el margen izquierdo */
     }
   }
