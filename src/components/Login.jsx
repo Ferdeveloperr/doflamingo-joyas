@@ -8,10 +8,12 @@ export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false); // Estado para el loader
   const navigate = useNavigate(); // Hook para la navegación
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true); // Activa el loader
 
     try {
       const response = await axios.post('http://localhost:5000/login', {
@@ -20,7 +22,6 @@ export function Login() {
       });
 
       if (response.status === 200) {
-        // Aquí puedes manejar el éxito, como guardar el token, redirigir al usuario, etc.
         localStorage.setItem('token', response.data.token);
         Swal.fire({
           title: 'Inicio de sesión exitoso',
@@ -28,11 +29,15 @@ export function Login() {
           icon: 'success',
           confirmButtonText: 'Ok'
         }).then(() => {
-          navigate('/');
-          window.location.reload();
+          setTimeout(() => {
+            setLoading(false); // Desactiva el loader
+            navigate('/');
+            window.location.reload();
+          }, 2000); // Retraso de 1 segundo (1000 ms) antes de redirigir
         });
-      } 
+      }
     } catch (error) {
+      setLoading(false); // Desactiva el loader
       if (error.response) {
         setError(error.response.data.message || 'Error al iniciar sesión');
         Swal.fire({
@@ -88,7 +93,9 @@ export function Login() {
             />
           </div>
           {error && <p className="login-error">{error}</p>}
-          <button type="submit" className="login-submit">Iniciar sesión</button>
+          <button type="submit" className="login-submit" disabled={loading}>
+            {loading ? 'Iniciando...' : 'Iniciar sesión'}
+          </button>
         </form>
         <p className="login-password-reset">
           <Link to="/forgot-password">Olvidé mi contraseña</Link>
@@ -96,16 +103,13 @@ export function Login() {
         <p className="login-signup">
           ¿No tienes cuenta? <Link to="/register">Regístrate</Link>
         </p>
+        {loading && (
+          <div className="loader-container">
+            <div className="loader"></div>
+            <p>Iniciando sesión...</p>
+          </div>
+        )}
       </div>
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
