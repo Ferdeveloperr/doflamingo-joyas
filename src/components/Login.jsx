@@ -16,7 +16,7 @@ export function Login() {
     setLoading(true); // Activa el loader
 
     try {
-      const response = await axios.post('https://doflamingo-joyas-uh7t.vercel.app/login', {
+      const response = await axios.post('https://immense-everglades-49913.herokuapp.com/login', {
         email,
         password
       });
@@ -33,7 +33,7 @@ export function Login() {
             setLoading(false); // Desactiva el loader
             navigate('/');
             window.location.reload();
-          }, 2000); // Retraso de 1 segundo (1000 ms) antes de redirigir
+          }, 2000); // Retraso de 2 segundos antes de redirigir
         });
       }
     } catch (error) {
