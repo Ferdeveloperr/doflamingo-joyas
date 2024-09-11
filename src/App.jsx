@@ -61,7 +61,7 @@ function App() {
                   translateZ="30vh"
                   overlay="rgba(0,0,0,5)"
                 >
-                  <img src="./public/bannerOcho.png" alt="image" className='h-100' />
+                  <img src="./bannerOcho.png" alt="image" className='h-100' />
                 </SimpleParallax>
               </div>
             </section>
