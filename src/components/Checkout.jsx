@@ -19,6 +19,7 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [pendingOrder, setPendingOrder] = useState(null);
   const [showOrderModal, setShowOrderModal] = useState(false);
+  const [isOrderConfirmed, setIsOrderConfirmed] = useState(false); // Estado para controlar la confirmación de la orden
   const CLIENT_ID = "AXSG0Id7SFwyt_2uilTmgNhK4yPPreubcHvfplr-sEM6cDNgd_bcKUrXLPUVgMlVDinH3hhhKg2P-0tI";
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ const Checkout = () => {
     if (user && user._id) {
       axios.get(`http://localhost:5000/api/orders/pending/${user._id}`)
         .then(response => {
-            console.log('Respuesta de Verificación de Orden Pendiente:', response.data); // Log para verificar respuesta
+          console.log('Respuesta de Verificación de Orden Pendiente:', response.data);
           if (response.data.hasPendingOrder) {
             setPendingOrder(response.data.order);
             setShowOrderModal(true);
@@ -42,7 +43,7 @@ const Checkout = () => {
     setShowOrderModal(false);
   };
 
-  const handleSubmit = async (e) => {
+  const handleOrderConfirmation = async (e) => {
     e.preventDefault();
     setLoading(true);
 
@@ -80,41 +81,33 @@ const Checkout = () => {
       email: email,
     };
 
-    console.log('Datos de la Orden:', order); // Log para verificar datos enviados
+    console.log('Datos de la Orden:', order);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/paypal/create-paypal-order', order, {
+      const response = await axios.post('http://localhost:5000/api/orders', order, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
-      console.log('Respuesta de PayPal:', response.data); // Log para verificar respuesta de PayPal
+      console.log('Orden creada:', response.data);
 
-      const paymentUrl = response.data.paymentUrl;
+      Swal.fire({
+        icon: 'success',
+        title: 'Orden Confirmada',
+        text: 'Tu orden ha sido confirmada. Ahora puedes proceder al pago.',
+        showConfirmButton: false,
+        timer: 3000,
+      });
 
-      if (paymentUrl) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Orden Creada',
-          text: 'Tu orden ha sido creada exitosamente. Serás redirigido a la página de pago.',
-          showConfirmButton: false,
-          timer: 3000,
-        });
-
-        setTimeout(() => {
-          window.location.href = paymentUrl;
-        }, 3000);
-      } else {
-        throw new Error('No se obtuvo una URL de pago de PayPal');
-      }
+      setIsOrderConfirmed(true); // Actualizar el estado para mostrar PayPal
     } catch (error) {
       Swal.fire({
         icon: 'error',
-        title: 'Error al Crear la Orden',
+        title: 'Error al Confirmar la Orden',
         text: error.response ? error.response.data.message : error.message,
       });
-      console.error('Error al crear la orden:', error);
+      console.error('Error al confirmar la orden:', error);
     } finally {
       setLoading(false);
     }
@@ -122,7 +115,7 @@ const Checkout = () => {
 
   const handleApprovePayPal = async (data, actions) => {
     try {
-        console.log('Datos de PayPal al Aprobar:', data); // Log para verificar datos al aprobar
+      console.log('Datos de PayPal al Aprobar:', data);
       await actions.order.capture();
       Swal.fire({
         icon: 'success',
@@ -147,7 +140,7 @@ const Checkout = () => {
       {!pendingOrder && !showOrderModal && (
         <>
           <h2>Checkout</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleOrderConfirmation}>
             <label>
               Nombre Completo:
               <input
@@ -200,11 +193,16 @@ const Checkout = () => {
               </select>
             </label>
 
-            {paymentMethod === 'paypal' && (
+            {!isOrderConfirmed && (
+              <button type="submit" disabled={loading}>
+                {loading ? 'Procesando...' : 'Confirmar Orden'}
+              </button>
+            )}
+
+            {isOrderConfirmed && paymentMethod === 'paypal' && (
               <PayPalScriptProvider options={{ "client-id": CLIENT_ID }}>
                 <PayPalButtons
                   createOrder={(data, actions) => {
-                    console.log('Datos de PayPal al Crear la Orden:', data); // Log para verificar datos al crear orden
                     return actions.order.create({
                       purchase_units: [{
                         amount: {
@@ -216,12 +214,6 @@ const Checkout = () => {
                   onApprove={handleApprovePayPal}
                 />
               </PayPalScriptProvider>
-            )}
-
-            {paymentMethod !== 'paypal' && (
-              <button type="submit" disabled={loading}>
-                {loading ? 'Procesando...' : 'Confirmar Orden'}
-              </button>
             )}
           </form>
         </>
