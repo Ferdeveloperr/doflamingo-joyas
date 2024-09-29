@@ -77,7 +77,7 @@ Envía un pull request describiendo los cambios que realizaste.
 
 Si tienes preguntas o sugerencias, no dudes en ponerte en contacto:
 
-- **YouTube:** [Ferdeveloperr](https://www.youtube.com/c/Ferdeveloperr)
-- **LinkedIn:** [Fernando Gómez](https://www.linkedin.com/in/fernando-gómez)
-- **Instagram:** [Ferdeveloperr](https://www.instagram.com/ferdeveloperr)
+- **YouTube:** [Ferdeveloperr](https://www.youtube.com/@Ferdeveloperr)
+- **LinkedIn:** [Fernando Gómez](https://www.linkedin.com/in/ferdeveloper-/)
+- **Instagram:** [Ferdeveloperr](https://www.instagram.com/ferdeveloper_/)
 
