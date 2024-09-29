@@ -71,9 +71,13 @@ Copiar código
 git checkout -b feature/nombre-de-la-feature
 Realiza los cambios necesarios y confirma los commits.
 Envía un pull request describiendo los cambios que realizaste.
-Contacto y Redes Sociales
+
+
+## Contacto y Redes Sociales
+
 Si tienes preguntas o sugerencias, no dudes en ponerte en contacto:
 
-YouTube: Ferdeveloperr
-LinkedIn: Fernando Gómez
-Instagram: Ferdeveloperr
+- **YouTube:** [Ferdeveloperr](https://www.youtube.com/c/Ferdeveloperr)
+- **LinkedIn:** [Fernando Gómez](https://www.linkedin.com/in/fernando-gómez)
+- **Instagram:** [Ferdeveloperr](https://www.instagram.com/ferdeveloperr)
+
