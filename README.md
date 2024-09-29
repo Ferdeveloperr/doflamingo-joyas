@@ -1,39 +1,49 @@
-Doflamingo Joyas
+# Doflamingo Joyas
 
 Doflamingo Joyas es una tienda de joyas online con un sistema de gestión completo para productos, usuarios, carritos y órdenes, que facilita a los clientes la compra de joyas a través de una interfaz moderna y eficiente. El proyecto está diseñado para escalar y ofrece una experiencia de usuario fluida con un catálogo interactivo, un carrito de compras y procesos de pago seguros integrados con PayPal.
 
-Capturas de Pantalla
-Página de Inicio
+## Capturas de Pantalla
 
-Proceso de Compra
+- **Página de Inicio**
+- **Proceso de Compra**
 
-Características Principales
-Catálogo de Productos: Vista completa del catálogo de joyas disponible, con filtros dinámicos y opciones de búsqueda.
-Carrito de Compras: Los usuarios pueden agregar productos al carrito, modificar cantidades y eliminarlos si es necesario.
-Proceso de Pago con PayPal: Integración con PayPal para pagos seguros, garantizando una experiencia de usuario sin fricciones.
-Sistema CRUD Completo:
-Usuarios: Registro, inicio de sesión y gestión de cuentas.
-Productos: Crear, actualizar, eliminar y listar productos desde el panel administrativo.
-Carritos: Gestión del carrito de compras.
-Órdenes: Registro y visualización de órdenes.
-Tecnologías Utilizadas
+## Características Principales
+
+- **Catálogo de Productos:** Vista completa del catálogo de joyas disponible, con filtros dinámicos y opciones de búsqueda.
+- **Carrito de Compras:** Los usuarios pueden agregar productos al carrito, modificar cantidades y eliminarlos si es necesario.
+- **Proceso de Pago con PayPal:** Integración con PayPal para pagos seguros, garantizando una experiencia de usuario sin fricciones.
+- **Sistema CRUD Completo:**
+  - **Usuarios:** Registro, inicio de sesión y gestión de cuentas.
+  - **Productos:** Crear, actualizar, eliminar y listar productos desde el panel administrativo.
+  - **Carritos:** Gestión del carrito de compras.
+  - **Órdenes:** Registro y visualización de órdenes.
+
+## Tecnologías Utilizadas
+
 El proyecto está construido utilizando las siguientes tecnologías y herramientas:
 
-Frontend
-React: Librería para construir interfaces de usuario.
-Tailwind CSS: Framework de CSS para estilos altamente personalizables.
-Backend
-Node.js: Entorno de ejecución de JavaScript en el servidor.
-Express: Framework minimalista para crear servidores web.
-MongoDB y Mongoose: Base de datos NoSQL y ODM para la gestión de datos.
-Integración de Pagos
-PayPal: Procesador de pagos utilizado para manejar transacciones.
-Instalación y Configuración
+### Frontend
+
+- **React:** Librería para construir interfaces de usuario.
+- **Tailwind CSS:** Framework de CSS para estilos altamente personalizables.
+
+### Backend
+
+- **Node.js:** Entorno de ejecución de JavaScript en el servidor.
+- **Express:** Framework minimalista para crear servidores web.
+- **MongoDB y Mongoose:** Base de datos NoSQL y ODM para la gestión de datos.
+
+### Integración de Pagos
+
+- **PayPal:** Procesador de pagos utilizado para manejar transacciones.
+
+## Instalación y Configuración
+
 1. Clonar el repositorio:
-bash
-Copiar código
-git clone https://github.com/usuario/doflamingo-joyas.git
-cd doflamingo-joyas
+   bash
+   git clone https://github.com/usuario/doflamingo-joyas.git
+   cd doflamingo-joyas
+
 2. Instalar dependencias:
 bash
 Copiar código
