@@ -4,10 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"nodemon index.js\"",
-    "build": "vite build",
+    "dev": "nodemon index.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
     "backend": "nodemon index.js",
     "start": "node index.js",
     "test": "jest"
