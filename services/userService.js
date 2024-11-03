@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000'; // URL de tu backend
+const API_URL = 'https://doflax-1266745114d1.herokuapp.com'; // URL de tu backend
 
 // Registrar un usuario
 export const registerUser = async (userData) => {
