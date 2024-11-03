@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 // Configurar CORS
 app.use(cors({
-  origin: [ 'https://doflax-1266745114d1.herokuapp.com', 'https://loquacious-gecko-add47f.netlify.app' ],
+  origin: [ 'https://doflax-1266745114d1.herokuapp.com', 'https://doflamingojoyas.netlify.app/' ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
