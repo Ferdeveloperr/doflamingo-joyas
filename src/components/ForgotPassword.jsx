@@ -11,7 +11,7 @@ export function ForgotPassword() {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/forgot-password', { email });
+      const response = await axios.post('https://doflax-1266745114d1.herokuapp.com/forgot-password', { email });
       
       if (response.status === 200) {
         setMessage('Se ha enviado un enlace de recuperación a tu correo electrónico.');
