@@ -17,7 +17,7 @@ export function NavBar({ products = [] }) {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      axios.get('http://localhost:5000/me', {
+      axios.get('https://doflax-1266745114d1.herokuapp.com/me', {
         headers: {
           Authorization: `Bearer ${token}`
         }
