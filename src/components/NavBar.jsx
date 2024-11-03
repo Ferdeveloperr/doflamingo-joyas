@@ -62,7 +62,7 @@ export function NavBar({ products = [] }) {
           cancelButtonText: 'Cancelar'
         }).then((result) => {
           if (result.isConfirmed) {
-            window.open('https://wa.me/1234567890?text=Hola,%20me%20interesa%20hacer%20un%20pedido%20personalizado.', '_blank');
+            window.open('https://wa.me/1126629808?text=Hola,%20me%20interesa%20hacer%20un%20pedido%20personalizado.', '_blank');
           }
         });
       }

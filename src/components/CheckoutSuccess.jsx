@@ -18,7 +18,7 @@ const CheckoutSuccess = () => {
 
     const confirmPayment = async () => {
       try {
-        const response = await axios.post('http://localhost:5000/api/paypal/confirm-payment', {
+        const response = await axios.post('https://doflax-1266745114d1.herokuapp.com/api/paypal/confirm-payment', {
           payerID,
           paymentID,
           token,

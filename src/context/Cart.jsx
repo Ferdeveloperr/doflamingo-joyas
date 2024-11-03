@@ -15,7 +15,7 @@ export function CartProvider({ children }) {
             if (!token) return;
 
             try {
-                const response = await axios.get('http://localhost:5000/api/cart', {
+                const response = await axios.get('https://doflax-1266745114d1.herokuapp.com/api/cart', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -39,7 +39,7 @@ export function CartProvider({ children }) {
 
     const fetchProductDetails = async (productIds) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/products/details', {
+            const response = await axios.post('https://doflax-1266745114d1.herokuapp.com/api/products/details', {
                 ids: productIds
             });
             setProductDetails(response.data); // Almacena los detalles de los productos en el estado
@@ -52,7 +52,7 @@ export function CartProvider({ children }) {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.post('http://localhost:5000/api/cart/add', {
+            const response = await axios.post('https://doflax-1266745114d1.herokuapp.com/api/cart/add', {
                 productId: product._id,
                 quantity: 1
                   
@@ -74,7 +74,7 @@ export function CartProvider({ children }) {
     const removeFromCart = async (product) => {
         const token = localStorage.getItem('token');
         try {
-            const response = await axios.post('http://localhost:5000/api/cart/remove', {
+            const response = await axios.post('https://doflax-1266745114d1.herokuapp.com/api/cart/remove', {
                 productId: product.productId,
                 quantity: 1
             }, {
@@ -95,7 +95,7 @@ export function CartProvider({ children }) {
         const token = localStorage.getItem('token');
 
         try {
-            await axios.delete('http://localhost:5000/api/cart/clear', {
+            await axios.delete('https://doflax-1266745114d1.herokuapp.com/api/cart/clear', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

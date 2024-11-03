@@ -9,7 +9,7 @@ export function UserProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      axios.get('http://localhost:5000/me', { headers: { Authorization: `Bearer ${token}` } })
+      axios.get('https://doflax-1266745114d1.herokuapp.com/me', { headers: { Authorization: `Bearer ${token}` } })
         .then(response => {
           setUser(response.data); // Asume que response.data es un objeto JSON válido
         })

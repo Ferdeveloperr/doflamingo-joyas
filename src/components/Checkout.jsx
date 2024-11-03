@@ -25,7 +25,7 @@ const Checkout = () => {
 
   useEffect(() => {
     if (user && user._id) {
-      axios.get(`http://localhost:5000/api/orders/pending/${user._id}`)
+      axios.get(`https://doflax-1266745114d1.herokuapp.com/api/orders/pending/${user._id}`)
         .then(response => {
           console.log('Respuesta de Verificación de Orden Pendiente:', response.data);
           if (response.data.hasPendingOrder) {

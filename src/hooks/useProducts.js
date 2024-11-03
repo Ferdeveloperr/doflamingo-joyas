@@ -11,7 +11,7 @@ export function useProducts() {
     const fetchProducts = async () => {
       try {
         console.log('Fetching products with filters:', filter); // Debugging
-        const response = await axios.get('http://localhost:5000/api/products', {
+        const response = await axios.get('https://doflax-1266745114d1.herokuapp.com/api/products', {
           params: {
             minPrice: filter.minPrice,
             category: filter.category,
