@@ -63,7 +63,7 @@ router.post('/forgot-password', async (req, res) => {
     user.resetPasswordExpires = Date.now() + 3600000; // Token expira en 1 hora
     await user.save();
 
-    const resetURL = `http://localhost:5173/reset-password?token=${token}`;
+    const resetURL = `https://doflamingojoyas.netlify.app/reset-password?token=${token}`;
     const mailOptions = {
       to: user.email,
       from: process.env.EMAIL_USER,
