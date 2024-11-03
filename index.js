@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 // Configurar CORS
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174', 'https://doflamingo-joyas-uh7t.vercel.app' ],
+  origin: ['http://localhost:5173', 'http://localhost:5174', 'https://doflax-1266745114d1.herokuapp.com' ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));

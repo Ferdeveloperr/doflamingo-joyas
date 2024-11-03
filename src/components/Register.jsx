@@ -29,7 +29,7 @@ export function Register() {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/register', {
+      const response = await axios.post('https://doflax-1266745114d1.herokuapp.com/register', {
         name,
         email,
         password

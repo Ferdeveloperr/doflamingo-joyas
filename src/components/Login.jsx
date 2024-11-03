@@ -16,7 +16,7 @@ export function Login() {
     setLoading(true); // Activa el loader
 
     try {
-      const response = await axios.post('http://localhost:5000/login', {
+      const response = await axios.post('https://doflax-1266745114d1.herokuapp.com/login', {
         email,
         password
       });
