@@ -25,6 +25,10 @@ app.use(cors({
   credentials: true
 }));
 
+app.get('/hola', (req, res) => {
+  res.send('Bienvenido a la API de Doflamingo Joyas');
+});
+
 // Usar las rutas de usuario
 app.use('/', userRoutes);
 // Usa las rutas del carrito
