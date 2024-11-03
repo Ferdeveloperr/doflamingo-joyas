@@ -25,7 +25,7 @@ const ResetPassword = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/reset-password', {
+      await axios.post('https://doflax-1266745114d1.herokuapp.com/reset-password', {
         token,
         password
         
