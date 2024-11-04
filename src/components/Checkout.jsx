@@ -84,7 +84,7 @@ const Checkout = () => {
     console.log('Datos de la Orden:', order);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/orders', order, {
+      const response = await axios.post('https://doflax-1266745114d1.herokuapp.com/api/orders', order, {
         headers: {
           'Content-Type': 'application/json',
         },
