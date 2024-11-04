@@ -16,8 +16,8 @@ export const createPayPalOrder = async (req, res) => {
       }
     }],
     application_context: {
-      return_url: `http://localhost:5173/checkout/success?orderId=${orderId}`,  // Cambia esta URL según tu frontend
-      cancel_url: 'http://localhost:5173/checkout/cancel',
+      return_url: `https://doflamingojoyas.netlify.app/success?orderId=${orderId}`,  // Cambia esta URL según tu frontend
+      cancel_url: 'https://doflamingojoyas.netlify.app/checkout/cancel',
     }
   });
 
@@ -54,7 +54,7 @@ export const handlePayPalSuccess = async (req, res) => {
       if (dbOrder) {
         dbOrder.status = 'completed';
         await dbOrder.save();
-        res.redirect('http://localhost:5173/checkout/success'); // Redirige al usuario al éxito del pago
+        res.redirect('https://doflamingojoyas.netlify.app/checkout/success'); // Redirige al usuario al éxito del pago
       } else {
         res.status(404).json({ message: 'Orden no encontrada' });
       }
@@ -69,5 +69,5 @@ export const handlePayPalSuccess = async (req, res) => {
 
 // Manejar el retorno de PayPal después de un pago cancelado
 export const handlePayPalCancel = (req, res) => {
-  res.redirect('http://localhost:5173/checkout/cancel'); // Redirige al usuario a la página de cancelación del pago
+  res.redirect('https://doflamingojoyas.netlify.app/checkout/cancel'); // Redirige al usuario a la página de cancelación del pago
 };
