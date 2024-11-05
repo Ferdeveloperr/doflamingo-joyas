@@ -205,6 +205,7 @@ const Checkout = () => {
               <PayPalScriptProvider options={{ "client-id": CLIENT_ID }}>
                 <PayPalButtons
                   createOrder={(data, actions) => {
+                    console.log('Creando orden PayPal:', totalPrice);
                     return actions.order.create({
                       purchase_units: [{
                         amount: {
