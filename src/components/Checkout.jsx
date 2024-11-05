@@ -107,11 +107,13 @@ const Checkout = () => {
         title: 'Error al Confirmar la Orden',
         text: error.response ? error.response.data.message : error.message,
       });
-      console.error('Error al confirmar la orden:', error);
+      console.error('Error al confirmar la orden:', error.response ? error.response.data.message : error.message);
     } finally {
       setLoading(false);
     }
+    
   };
+  
 
   const handleApprovePayPal = async (data, actions) => {
     try {
